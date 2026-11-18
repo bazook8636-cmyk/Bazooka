@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ولاد شعبان هندي | فوميه وكماليات السيارات والموتوسيكلات</title>
+    <!-- تحميل Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- تحميل مكتبة QRCode لتوليد كود المسح السريع للمحل -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <!-- خط Cairo العصري -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- أيقونات FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        cairo: ['Cairo', 'sans-serif'],
+                    },
+                    colors: {
+                        obsidian: '#07080a',
+                        carbon: '#111318',
+                        steel: '#1a1d24',
+                        goldAccent: '#f59e0b',
+                        neonBlue: '#38bdf8',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #07080a;
+            /* تدرج لوني فخم يعبر عن الفوميه (أسود فحمي مع إضاءة ذهبية وأزرق نيون خفيف) */
+            background-image: 
+                radial-gradient(circle at 15% 10%, rgba(245, 158, 11, 0.12) 0%, transparent 45%),
+                radial-gradient(circle at 85% 90%, rgba(56, 189, 248, 0.12) 0%, transparent 45%),
+                linear-gradient(180deg, #07080a 0%, #0d1015 100%);
+            min-height: 100vh;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* تأثير زجاج الفوميه الداكن */
+        .tinted-glass {
+            background: rgba(17, 19, 24, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.85), inset 0 1px 0 0 rgba(255, 255, 255, 0.06);
+        }
+
+        /* تأثير التوهج عند الكتابة */
+        .field-focus:focus {
+            border-color: #f59e0b;
+            box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.18), 0 0 15px rgba(56, 189, 248, 0.1);
+        }
+
+        /* نبض تسجيل الصوت */
+        @keyframes micPulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.65); }
+            50% { box-shadow: 0 0 0 12px rgba(239, 68, 68, 0); }
+        }
+        .pulse-rec {
+            animation: micPulse 1.4s infinite;
+        }
+
+        /* حركة ظهور البطاقات */
+        @keyframes slideUpFade {
+            from { opacity: 0; transform: translateY(14px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .animate-entry {
+            animation: slideUpFade 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        /* تنسيق مشغل الصوت ليناسب الثيم الداكن */
+        audio::-webkit-media-controls-panel {
+            background-color: #1a1d24;
+        }
+        audio::-webkit-media-controls-current-time-display,
+        audio::-webkit-media-controls-time-remaining-display {
+            color: #f4f4f5;
+        }
+
+        /* تنسيق خاص للطباعة (لطباعة كود الـ QR للمحل) */
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            #qrPrintableArea, #qrPrintableArea * {
+                visibility: visible;
+            }
+            #qrPrintableArea {
+                position: fixed;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                background: white !important;
+                color: black !important;
+                padding: 30px;
+                border: 2px solid #000;
+                border-radius: 20px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body class="text-zinc-100 antialiased selection:bg-amber-500 selection:text-zinc-950 flex flex-col justify-between p-3.5 sm:p-6">
+
+    <!-- الهيدر العلوي بتصميم تطبيق موبايل فخم -->
+    <header class="w-full max-w-xl mx-auto tinted-glass rounded-2xl p-3.5 sm:p-4 mb-5 flex items-center justify-between gap-2 relative overflow-hidden">
+        <!-- خط إضاءة علوي متدرج (ذهبي إلى أزرق نيون) -->
+        <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-amber-500 via-sky-400 to-amber-500 opacity-80"></div>
+
+        <div class="flex items-center gap-3">
+            <!-- شعار المحل -->
+            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-zinc-800 to-zinc-950 border border-amber-500/40 flex items-center justify-center shadow-lg shadow-amber-500/10 shrink-0 relative">
+                <i class="fa-solid fa-car-side text-amber-400 text-xl"></i>
+                <span class="absolute -bottom-1 -left-1 w-4 h-4 rounded-full bg-sky-500/20 border border-sky-400/50 flex items-center justify-center">
+                    <i class="fa-solid fa-motorcycle text-[8px] text-sky-300"></i>
+                </span>
+            </div>
+            <div>
+                <h1 class="font-black text-base sm:text-xl text-white tracking-tight leading-tight">
+                    ولاد شعبان هندي
+                </h1>
+                <p class="text-[11px] sm:text-xs font-bold bg-gradient-to-l from-amber-400 to-sky-400 bg-clip-text text-transparent mt-0.5">
+                    فوميه وكماليات السيارات والموتوسيكلات
+                </p>
+            </div>
+        </div>
+
+        <!-- أزرار سريعة لصاحب المحل والزبائن (QR Code + مشاركة) -->
+        <div class="flex items-center gap-2 shrink-0">
+            <button type="button" onclick="openQrModal()" 
+                class="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-zinc-800/90 hover:bg-zinc-700 text-amber-400 border border-amber-500/30 text-xs font-bold transition-all active:scale-95 cursor-pointer"
+                title="عرض أو طباعة كود QR للمحل">
+                <i class="fa-solid fa-qrcode text-sm"></i>
+                <span class="hidden sm:inline">كود QR</span>
+            </button>
+
+            <button type="button" onclick="copyQuickLink()" 
+                class="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-sky-500/10 hover:bg-sky-500/20 text-sky-400 border border-sky-400/30 text-xs font-bold transition-all active:scale-95 cursor-pointer"
+                title="نسخ الرابط لإرساله للزبون">
+                <i class="fa-solid fa-share-nodes text-sm"></i>
+                <span class="hidden sm:inline">مشاركة</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- المحتوى الرئيسي -->
+    <main class="w-full max-w-xl mx-auto my-auto">
+        
+        <!-- بطاقة إرسال الطلب -->
+        <div id="orderCard" class="tinted-glass rounded-3xl p-5 sm:p-7 animate-entry relative overflow-hidden">
+            
+            <!-- شارة الحالة -->
+            <div class="flex items-center justify-between mb-4">
+                <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-500/10 border border-sky-400/25 text-sky-300 text-xs font-bold">
+                    <span class="w-2 h-2 rounded-full bg-sky-400 animate-ping"></span>
+                    <span>استقبال الشغل والطلبات مباشرة</span>
+                </span>
+                <span class="text-[11px] text-zinc-500 font-semibold">بدون واتساب • سريع ومباشر</span>
+            </div>
+
+            <div class="mb-6">
+                <h2 class="text-xl sm:text-2xl font-extrabold text-white mb-1">
+                    ابعت طلبك أو صور الشغل فوراً
+                </h2>
+                <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed">
+                    سجل فويس باللي محتاجه، أو ابعت صور العربية / الموتوسيكل ودرجة الفوميه، وهيصلنا فوراً.
+                </p>
+            </div>
+
+            <!-- النموذج -->
+            <form id="shopOrderForm" class="space-y-4" novalidate>
+                
+                <!-- الاسم ورقم التليفون (اختياريان بالكامل) -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                    <div>
+                        <label for="customerName" class="flex items-center justify-between text-xs font-bold text-zinc-300 mb-1.5">
+                            <span><i class="fa-regular fa-user text-amber-400 ml-1"></i>الاسم</span>
+                            <span class="text-[10px] text-zinc-500 font-normal">(اختياري)</span>
+                        </label>
+                        <input type="text" id="customerName" placeholder="اكتب اسمك لو حابب..."
+                            class="w-full px-3.5 py-3 rounded-xl bg-obsidian/90 border border-zinc-800 text-sm text-white placeholder-zinc-600 focus:outline-none field-focus transition-all">
+                    </div>
+
+                    <div>
+                        <label for="customerPhone" class="flex items-center justify-between text-xs font-bold text-zinc-300 mb-1.5">
+                            <span><i class="fa-solid fa-phone text-sky-400 ml-1"></i>رقم التليفون</span>
+                            <span class="text-[10px] text-zinc-500 font-normal">(اختياري)</span>
+                        </label>
+                        <input type="tel" id="customerPhone" dir="ltr" placeholder="010xxxxxxxx (اختياري)"
+                            class="w-full px-3.5 py-3 rounded-xl bg-obsidian/90 border border-zinc-800 text-sm text-white text-right placeholder-zinc-600 focus:outline-none field-focus transition-all font-mono">
+                    </div>
+                </div>
+
+                <!-- قسم تسجيل الرسالة الصوتية (فويس نوت) -->
+                <div class="p-4 rounded-2xl bg-obsidian/75 border border-zinc-800/90 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs sm:text-sm font-bold text-zinc-200 flex items-center gap-2">
+                            <span class="w-7 h-7 rounded-lg bg-red-500/15 text-red-400 flex items-center justify-center">
+                                <i class="fa-solid fa-microphone"></i>
+                            </span>
+                            <span>سجل رسالة صوتية (فويس)</span>
+                        </span>
+                        <span id="voiceBadge" class="text-[11px] font-semibold text-zinc-500">اضغط للتسجيل</span>
+                    </div>
+
+                    <!-- أزرار التحكم بالتسجيل -->
+                    <div id="voiceControls" class="flex items-center gap-2.5">
+                        <button type="button" id="btnStartRec" onclick="startVoiceRecording()"
+                            class="w-full py-3 px-4 rounded-xl bg-steel hover:bg-zinc-800 border border-zinc-700/80 hover:border-red-500/50 text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2.5 transition-all active:scale-[0.98] cursor-pointer">
+                            <span class="w-2.5 h-2.5 rounded-full bg-red-500"></span>
+                            <span>اضغط هنا لتسجيل فويس بالطلب</span>
+                        </button>
+
+                        <button type="button" id="btnStopRec" onclick="stopVoiceRecording()"
+                            class="hidden w-full py-3 px-4 rounded-xl bg-red-600 hover:bg-red-500 text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-3 pulse-rec transition-all cursor-pointer">
+                            <i class="fa-solid fa-stop"></i>
+                            <span>إيقاف وحفظ الفويس</span>
+                            <span id="recTimer" class="font-mono bg-black/30 px-2 py-0.5 rounded text-xs">00:00</span>
+                        </button>
+                    </div>
+
+                    <!-- معاينة الفويس المسجل -->
+                    <div id="voicePreviewContainer" class="hidden flex items-center gap-2 bg-steel/90 p-2 rounded-xl border border-amber-500/30">
+                        <audio id="voicePlayer" controls class="w-full h-9 rounded-lg"></audio>
+                        <button type="button" onclick="clearVoiceRecording()" title="حذف الفويس"
+                            class="w-9 h-9 rounded-lg bg-red-500/20 hover:bg-red-500 text-red-400 hover:text-white flex items-center justify-center shrink-0 transition-colors cursor-pointer">
+                            <i class="fa-solid fa-trash-can text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- قسم إرفاق أو تصوير الصور -->
+                <div class="p-4 rounded-2xl bg-obsidian/75 border border-zinc-800/90 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs sm:text-sm font-bold text-zinc-200 flex items-center gap-2">
+                            <span class="w-7 h-7 rounded-lg bg-amber-500/15 text-amber-400 flex items-center justify-center">
+                                <i class="fa-solid fa-camera"></i>
+                            </span>
+                            <span>صور الشغل / العربية / الموتوسيكل</span>
+                        </span>
+                        <span id="imagesBadge" class="text-[11px] font-semibold text-zinc-500">صورة أو أكثر</span>
+                    </div>
+
+                    <label for="imageUploader" 
+                        class="flex flex-col items-center justify-center w-full py-4 px-3 border-2 border-dashed border-zinc-800 hover:border-amber-500/60 rounded-xl bg-carbon/50 hover:bg-steel/40 transition-all cursor-pointer group">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-amber-500/20 to-sky-500/20 text-amber-400 group-hover:scale-110 transition-transform flex items-center justify-center mb-1.5">
+                            <i class="fa-solid fa-images text-lg"></i>
+                        </div>
+                        <p class="text-xs sm:text-sm font-bold text-zinc-200 text-center">اضغط لرفع صور من المعرض أو التصوير بالكاميرا</p>
+                        <p class="text-[11px] text-zinc-500 mt-0.5">تقدر تختار أكتر من صورة في نفس الوقت</p>
+                        <input id="imageUploader" type="file" accept="image/*" multiple class="hidden" onchange="onImagesSelected(event)">
+                    </label>
+
+                    <!-- شبكة معاينة الصور -->
+                    <div id="imagesPreviewGrid" class="hidden grid grid-cols-3 sm:grid-cols-4 gap-2.5 pt-1"></div>
+                </div>
+
+                <!-- حقل تفاصيل الطلب -->
+                <div>
+                    <label for="orderNotes" class="block text-xs font-bold text-zinc-300 mb-1.5">
+                        <i class="fa-solid fa-wand-magic-sparkles text-amber-400 ml-1"></i>تفاصيل الشغل المطلوب (نوع العربية، درجة الفوميه، الكماليات)
+                    </label>
+                    <textarea id="orderNotes" rows="3"
+                        placeholder="مثال: فوميه حراري للعربية بالكامل، أو كماليات موتوسيكل... (اختياري لو بعت فويس أو صور)"
+                        class="w-full px-3.5 py-3 rounded-xl bg-obsidian/90 border border-zinc-800 text-sm text-white placeholder-zinc-600 focus:outline-none field-focus transition-all resize-none"></textarea>
+                </div>
+
+                <!-- صندوق التنبيهات -->
+                <div id="alertBox" class="hidden rounded-xl p-3.5 text-xs sm:text-sm font-bold flex items-center gap-2.5">
+                    <i id="alertIcon" class="text-base shrink-0"></i>
+                    <span id="alertMessage"></span>
+                </div>
+
+                <!-- زر الإرسال للمحل -->
+                <button type="submit" id="sendOrderBtn"
+                    class="w-full py-4 px-6 rounded-2xl font-black text-base text-zinc-950 bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 hover:from-amber-300 hover:to-amber-400 shadow-lg shadow-amber-500/20 transition-all duration-200 flex items-center justify-center gap-2.5 active:scale-[0.98] cursor-pointer">
+                    <span id="sendBtnLabel">إرسال الطلب للمحل</span>
+                    <i id="sendBtnIcon" class="fa-solid fa-paper-plane"></i>
+                </button>
+            </form>
+        </div>
+
+        <!-- بطاقة النجاح بعد الإرسال -->
+        <div id="successView" class="hidden tinted-glass rounded-3xl p-7 text-center animate-entry relative overflow-hidden">
+            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-400 via-emerald-400 to-sky-400"></div>
+
+            <div class="w-16 h-16 rounded-2xl bg-emerald-500/15 border border-emerald-400/40 flex items-center justify-center mx-auto mb-4 text-emerald-400 shadow-lg shadow-emerald-500/10">
+                <i class="fa-solid fa-check-double text-3xl"></i>
+            </div>
+
+            <h3 class="text-xl sm:text-2xl font-black text-white mb-1.5">تم إرسال طلبك بنجاح!</h3>
+            <p class="text-zinc-400 text-xs sm:text-sm max-w-sm mx-auto mb-5 leading-relaxed">
+                وصل الشغل والبيانات لإدارة <strong class="text-amber-400">ولاد شعبان هندي</strong> فوراً.
+            </p>
+
+            <!-- ملخص العملية -->
+            <div class="bg-obsidian/80 border border-zinc-800/90 rounded-2xl p-4 mb-6 text-right text-xs sm:text-sm space-y-2 max-w-sm mx-auto">
+                <div class="flex justify-between">
+                    <span class="text-zinc-500">الاسم:</span>
+                    <span id="resName" class="font-bold text-zinc-200"></span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-zinc-500">رقم التليفون:</span>
+                    <span id="resPhone" class="font-bold text-sky-400 font-mono" dir="ltr"></span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-zinc-500">المحتوى المرسل:</span>
+                    <span id="resContent" class="font-bold text-amber-400"></span>
+                </div>
+            </div>
+
+            <button type="button" onclick="resetToNewOrder()"
+                class="w-full sm:w-auto px-6 py-3.5 rounded-xl font-bold text-sm bg-steel hover:bg-zinc-800 text-white border border-zinc-700 transition-all inline-flex items-center justify-center gap-2 cursor-pointer">
+                <i class="fa-solid fa-rotate-right text-amber-400"></i>
+                <span>إرسال طلب أو صورة جديدة</span>
+            </button>
+        </div>
+
+    </main>
+
+    <!-- الفوتر -->
+    <footer class="w-full max-w-xl mx-auto text-center py-4 mt-4 space-y-2">
+        <div class="flex items-center justify-center gap-3 text-xs">
+            <button type="button" onclick="openQrModal()" class="text-zinc-400 hover:text-amber-400 transition-colors underline underline-offset-4 cursor-pointer">
+                عرض كود QR للطباعة بالمحل
+            </button>
+            <span class="text-zinc-700">•</span>
+            <button type="button" onclick="copyQuickLink()" class="text-zinc-400 hover:text-sky-400 transition-colors underline underline-offset-4 cursor-pointer">
+                نسخ رابط المحل
+            </button>
+        </div>
+        <p class="text-[11px] text-zinc-600 font-semibold">
+            ولاد شعبان هندي — فوميه وكماليات السيارات والموتوسيكلات
+        </p>
+    </footer>
+
+    <!-- نافذة منبثقة (Modal) لعرض وطباعة كود QR Code ومشاركة الرابط -->
+    <div id="qrModal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="tinted-glass rounded-3xl max-w-sm w-full p-6 text-center relative animate-entry border border-amber-500/20">
+            <button type="button" onclick="closeQrModal()" 
+                class="absolute top-4 left-4 w-8 h-8 rounded-full bg-zinc-800 hover:bg-zinc-700 text-zinc-400 hover:text-white flex items-center justify-center transition-colors cursor-pointer">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div id="qrPrintableArea">
+                <div class="inline-flex items-center justify-center w-11 h-11 rounded-xl bg-amber-500/15 text-amber-400 mb-2">
+                    <i class="fa-solid fa-qrcode text-xl"></i>
+                </div>
+                <h3 class="text-lg font-black text-white">ولاد شعبان هندي</h3>
+                <p class="text-xs text-amber-400 font-bold mb-4">فوميه وكماليات السيارات والموتوسيكلات</p>
+
+                <!-- حاوية الكود -->
+                <div class="bg-white p-4 rounded-2xl inline-block shadow-inner mb-3">
+                    <div id="qrcodeCanvas"></div>
+                </div>
+
+                <p class="text-xs text-zinc-400 mb-4">
+                    امسح الكود بكاميرا الموبايل لإرسال طلبك أو صور الشغل للمحل مباشرة
+                </p>
+            </div>
+
+            <div class="grid grid-cols-2 gap-2.5 mt-2">
+                <button type="button" onclick="window.print()"
+                    class="py-2.5 px-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-zinc-950 font-bold text-xs flex items-center justify-center gap-1.5 transition-all cursor-pointer">
+                    <i class="fa-solid fa-print"></i>
+                    <span>طباعة الكود</span>
+                </button>
+                <button type="button" onclick="copyQuickLink()"
+                    class="py-2.5 px-3 rounded-xl bg-steel hover:bg-zinc-700 text-sky-400 border border-sky-400/30 font-bold text-xs flex items-center justify-center gap-1.5 transition-all cursor-pointer">
+                    <i class="fa-regular fa-copy"></i>
+                    <span>نسخ الرابط</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- إشعار Toast سريع لنسخ الرابط -->
+    <div id="toastNotification" class="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 hidden px-4 py-2.5 rounded-full bg-zinc-900 border border-sky-400/40 text-sky-300 text-xs font-bold shadow-2xl flex items-center gap-2">
+        <i class="fa-solid fa-circle-check text-sky-400"></i>
+        <span id="toastText">تم نسخ رابط المحل بنجاح!</span>
+    </div>
+
+    <script>
+        // ==========================================
+        // بيانات الربط مع Telegram Bot API
+        // ==========================================
+        const BOT_TOKEN = "9092607150:AAH5MMRWqawNYQlyQ6mSKE2zzniF3mrLgmw";
+        const CHAT_ID = "6402034749";
+        const API_BASE = `https://api.telegram.org/bot${BOT_TOKEN}`;
+
+        // متغيرات الصوت والصور
+        let mediaRecorder = null;
+        let audioChunks = [];
+        let voiceBlob = null;
+        let voiceObjectUrl = null;
+        let recInterval = null;
+        let recSeconds = 0;
+        let attachedImages = [];
+        let qrGenerated = false;
+
+        // ==========================================
+        // 1. تسجيل الفويس نوت (Voice Note)
+        // ==========================================
+        async function startVoiceRecording() {
+            hideAlert();
+            if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+                showAlert('المتصفح لا يدعم تسجيل الصوت هنا. جرب فتح الرابط في متصفح Chrome أو Safari.', 'error');
+                return;
+            }
+
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                const preferredMime = MediaRecorder.isTypeSupported('audio/ogg;codecs=opus')
+                    ? 'audio/ogg;codecs=opus'
+                    : (MediaRecorder.isTypeSupported('audio/webm') ? 'audio/webm' : '');
+
+                mediaRecorder = preferredMime ? new MediaRecorder(stream, { mimeType: preferredMime }) : new MediaRecorder(stream);
+                audioChunks = [];
+
+                mediaRecorder.ondataavailable = (e) => {
+                    if (e.data.size > 0) audioChunks.push(e.data);
+                };
+
+                mediaRecorder.onstop = () => {
+                    const mime = mediaRecorder.mimeType || 'audio/ogg';
+                    voiceBlob = new Blob(audioChunks, { type: mime });
+                    if (voiceObjectUrl) URL.revokeObjectURL(voiceObjectUrl);
+                    voiceObjectUrl = URL.createObjectURL(voiceBlob);
+
+                    document.getElementById('voicePlayer').src = voiceObjectUrl;
+                    document.getElementById('voiceControls').classList.add('hidden');
+                    document.getElementById('voicePreviewContainer').classList.remove('hidden');
+
+                    const badge = document.getElementById('voiceBadge');
+                    badge.textContent = 'الفويس جاهز للإرسال ✓';
+                    badge.className = 'text-[11px] font-bold text-emerald-400';
+
+                    stream.getTracks().forEach(t => t.stop());
+                };
+
+                mediaRecorder.start();
+
+                document.getElementById('btnStartRec').classList.add('hidden');
+                document.getElementById('btnStopRec').classList.remove('hidden');
+
+                const badge = document.getElementById('voiceBadge');
+                badge.textContent = 'جاري التسجيل...';
+                badge.className = 'text-[11px] font-bold text-red-400 animate-pulse';
+
+                recSeconds = 0;
+                updateRecTimer();
+                recInterval = setInterval(() => {
+                    recSeconds++;
+                    updateRecTimer();
+                }, 1000);
+
+            } catch (err) {
+                console.error('Mic access denied:', err);
+                showAlert('من فضلك اسمح للمتصفح بالوصول للميكروفون لتسجيل الفويس.', 'error');
+            }
+        }
+
+        function stopVoiceRecording() {
+            if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+                mediaRecorder.stop();
+            }
+            clearInterval(recInterval);
+            document.getElementById('btnStopRec').classList.add('hidden');
+            document.getElementById('btnStartRec').classList.remove('hidden');
+        }
+
+        function clearVoiceRecording() {
+            voiceBlob = null;
+            if (voiceObjectUrl) {
+                URL.revokeObjectURL(voiceObjectUrl);
+                voiceObjectUrl = null;
+            }
+            document.getElementById('voicePlayer').src = '';
+            document.getElementById('voicePreviewContainer').classList.add('hidden');
+            document.getElementById('voiceControls').classList.remove('hidden');
+
+            const badge = document.getElementById('voiceBadge');
+            badge.textContent = 'اضغط للتسجيل';
+            badge.className = 'text-[11px] font-semibold text-zinc-500';
+        }
+
+        function updateRecTimer() {
+            const m = String(Math.floor(recSeconds / 60)).padStart(2, '0');
+            const s = String(recSeconds % 60).padStart(2, '0');
+            document.getElementById('recTimer').textContent = `${m}:${s}`;
+        }
+
+        // ==========================================
+        // 2. إدارة الصور (رفع ومعاينة وحذف)
+        // ==========================================
+        function onImagesSelected(event) {
+            const files = Array.from(event.target.files);
+            files.forEach(file => {
+                if (file.type.startsWith('image/')) {
+                    attachedImages.push(file);
+                }
+            });
+            event.target.value = '';
+            renderImagesGrid();
+        }
+
+        function removeAttachedImage(idx) {
+            attachedImages.splice(idx, 1);
+            renderImagesGrid();
+        }
+
+        function renderImagesGrid() {
+            const grid = document.getElementById('imagesPreviewGrid');
+            const badge = document.getElementById('imagesBadge');
+            grid.innerHTML = '';
+
+            if (attachedImages.length === 0) {
+                grid.classList.add('hidden');
+                badge.textContent = 'صورة أو أكثر';
+                badge.className = 'text-[11px] font-semibold text-zinc-500';
+                return;
+            }
+
+            grid.classList.remove('hidden');
+            badge.textContent = `تم اختيار ${attachedImages.length} صورة`;
+            badge.className = 'text-[11px] font-bold text-amber-400';
+
+            attachedImages.forEach((file, idx) => {
+                const url = URL.createObjectURL(file);
+                const item = document.createElement('div');
+                item.className = 'relative aspect-square rounded-xl overflow-hidden border border-zinc-700 bg-obsidian';
+                item.innerHTML = `
+                    <img src="${url}" alt="صورة مرفقة" class="w-full h-full object-cover">
+                    <button type="button" onclick="removeAttachedImage(${idx})" title="حذف الصورة"
+                        class="absolute top-1 left-1 w-6 h-6 rounded-full bg-red-600/90 hover:bg-red-500 text-white flex items-center justify-center text-[11px] shadow cursor-pointer">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                `;
+                grid.appendChild(item);
+            });
+        }
+
+        // ==========================================
+        // 3. دوال الإرسال إلى تليجرام
+        // ==========================================
+        function escapeHTML(text) {
+            return text
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;");
+        }
+
+        async function telegramSendText(htmlMessage) {
+            const res = await fetch(`${API_BASE}/sendMessage`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    chat_id: CHAT_ID,
+                    text: htmlMessage,
+                    parse_mode: 'HTML'
+                })
+            });
+            const data = await res.json();
+            if (!res.ok || !data.ok) throw new Error(data.description || 'فشل إرسال الرسالة');
+            return data;
+        }
+
+        async function telegramSendVoice(blob, caption) {
+            const fd = new FormData();
+            fd.append('chat_id', CHAT_ID);
+            const ext = blob.type.includes('webm') ? 'webm' : 'ogg';
+            fd.append('voice', blob, `customer_voice.${ext}`);
+            if (caption) {
+                fd.append('caption', caption);
+                fd.append('parse_mode', 'HTML');
+            }
+            const res = await fetch(`${API_BASE}/sendVoice`, { method: 'POST', body: fd });
+            const data = await res.json();
+            if (!res.ok || !data.ok) throw new Error(data.description || 'فشل إرسال الفويس');
+            return data;
+        }
+
+        async function telegramSendPhoto(file, caption) {
+            const fd = new FormData();
+            fd.append('chat_id', CHAT_ID);
+            fd.append('photo', file, file.name || 'work_photo.jpg');
+            if (caption) {
+                fd.append('caption', caption);
+                fd.append('parse_mode', 'HTML');
+            }
+            const res = await fetch(`${API_BASE}/sendPhoto`, { method: 'POST', body: fd });
+            const data = await res.json();
+            if (!res.ok || !data.ok) throw new Error(data.description || 'فشل إرسال الصورة');
+            return data;
+        }
+
+        // ==========================================
+        // 4. إرسال النموذج بالكامل
+        // ==========================================
+        document.getElementById('shopOrderForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            hideAlert();
+
+            const rawName = document.getElementById('customerName').value.trim();
+            const rawPhone = document.getElementById('customerPhone').value.trim();
+            const rawNotes = document.getElementById('orderNotes').value.trim();
+
+            // الاسم ورقم التليفون اختياريان تماماً، لذا نضع قيماً افتراضية واضحة لو تركهما الزبون فارغين
+            const displayName = rawName || 'زبون (بدون اسم)';
+            const displayPhone = rawPhone || 'لم يتم إدخال رقم';
+
+            // يجب أن يرسل الزبون محتوى واحداً على الأقل (تفاصيل مكتوبة أو فويس أو صورة)
+            if (!rawNotes && !voiceBlob && attachedImages.length === 0) {
+                showAlert('ابعتلنا أي حاجة: اكتب تفاصيل الشغل، أو سجل فويس، أو ارفع صورة.', 'error');
+                return;
+            }
+
+            const hasVoice = Boolean(voiceBlob);
+            const imgCount = attachedImages.length;
+
+            let summaryParts = [];
+            if (hasVoice) summaryParts.push('فويس 🎙️');
+            if (imgCount > 0) summaryParts.push(`${imgCount} صورة 📸`);
+            if (rawNotes) summaryParts.push('تفاصيل مكتوبة 📝');
+            const summaryText = summaryParts.join(' + ');
+
+            const timeNow = new Date().toLocaleString('ar-EG', {
+                hour: '2-digit',
+                minute: '2-digit',
+                day: 'numeric',
+                month: 'short'
+            });
+
+            // تنسيق الرسالة النصية المرسلة لبوت تليجرام
+            const formattedMessage = `
+🚘 <b>طلب / شغل جديد — ولاد شعبان هندي</b>
+<i>فوميه وكماليات السيارات والموتوسيكلات</i>
+━━━━━━━━━━━━━━━━━━
+👤 <b>الزبون:</b> ${escapeHTML(displayName)}
+📞 <b>التليفون:</b> ${rawPhone ? `<code>${escapeHTML(rawPhone)}</code>` : 'لم يتم إدخال رقم'}
+📦 <b>المرفقات:</b> ${summaryText}
+${rawNotes ? `\n📝 <b>تفاصيل الشغل:</b>\n${escapeHTML(rawNotes)}\n` : ''}━━━━━━━━━━━━━━━━━━
+⏰ <i>الوقت: ${timeNow}</i>
+            `.trim();
+
+            const btn = document.getElementById('sendOrderBtn');
+            const btnLabel = document.getElementById('sendBtnLabel');
+            const btnIcon = document.getElementById('sendBtnIcon');
+
+            try {
+                btn.disabled = true;
+                btn.classList.add('opacity-75', 'cursor-not-allowed');
+                btnLabel.textContent = 'جاري الإرسال للمحل...';
+                btnIcon.className = 'fa-solid fa-circle-notch fa-spin';
+
+                // 1. إرسال البيانات النصية
+                await telegramSendText(formattedMessage);
+
+                // 2. إرسال الفويس نوت إذا وجد
+                if (hasVoice) {
+                    btnLabel.textContent = 'جاري رفع الفويس...';
+                    const vCap = `🎙️ <b>فويس من:</b> ${escapeHTML(displayName)}${rawPhone ? ` | 📞 <code>${escapeHTML(rawPhone)}</code>` : ''}`;
+                    await telegramSendVoice(voiceBlob, vCap);
+                }
+
+                // 3. إرسال الصور إذا وجدت
+                if (imgCount > 0) {
+                    for (let i = 0; i < imgCount; i++) {
+                        btnLabel.textContent = `جاري رفع الصورة (${i + 1} من ${imgCount})...`;
+                        const pCap = `📸 <b>صورة (${i + 1}/${imgCount}) — ${escapeHTML(displayName)}</b>${rawPhone ? `\n📞 <code>${escapeHTML(rawPhone)}</code>` : ''}`;
+                        await telegramSendPhoto(attachedImages[i], pCap);
+                    }
+                }
+
+                // إظهار شاشة النجاح
+                document.getElementById('resName').textContent = displayName;
+                document.getElementById('resPhone').textContent = displayPhone;
+                document.getElementById('resContent').textContent = summaryText;
+
+                document.getElementById('orderCard').classList.add('hidden');
+                document.getElementById('successView').classList.remove('hidden');
+
+                // تصفير الحقول والمرفقات
+                document.getElementById('shopOrderForm').reset();
+                clearVoiceRecording();
+                attachedImages = [];
+                renderImagesGrid();
+
+            } catch (err) {
+                console.error('Telegram API Error:', err);
+                showAlert('تعذر الإرسال حالياً! تأكد من اتصالك بالإنترنت وجرب تاني.', 'error');
+            } finally {
+                btn.disabled = false;
+                btn.classList.remove('opacity-75', 'cursor-not-allowed');
+                btnLabel.textContent = 'إرسال الطلب للمحل';
+                btnIcon.className = 'fa-solid fa-paper-plane';
+            }
+        });
+
+        function resetToNewOrder() {
+            hideAlert();
+            document.getElementById('successView').classList.add('hidden');
+            document.getElementById('orderCard').classList.remove('hidden');
+        }
+
+        function showAlert(msg, type) {
+            const box = document.getElementById('alertBox');
+            const icon = document.getElementById('alertIcon');
+            const text = document.getElementById('alertMessage');
+
+            box.className = 'rounded-xl p-3.5 text-xs sm:text-sm font-bold flex items-center gap-2.5 border';
+            if (type === 'error') {
+                box.classList.add('bg-red-500/15', 'border-red-500/30', 'text-red-300');
+                icon.className = 'fa-solid fa-circle-exclamation text-red-400 text-base shrink-0';
+            } else {
+                box.classList.add('bg-emerald-500/15', 'border-emerald-500/30', 'text-emerald-300');
+                icon.className = 'fa-solid fa-circle-check text-emerald-400 text-base shrink-0';
+            }
+            text.textContent = msg;
+            box.classList.remove('hidden');
+        }
+
+        function hideAlert() {
+            document.getElementById('alertBox').classList.add('hidden');
+        }
+
+        // ==========================================
+        // 5. توليد QR Code ومشاركة الرابط
+        // ==========================================
+        function openQrModal() {
+            const modal = document.getElementById('qrModal');
+            modal.classList.remove('hidden');
+
+            if (!qrGenerated && typeof QRCode !== 'undefined') {
+                const container = document.getElementById('qrcodeCanvas');
+                container.innerHTML = '';
+                new QRCode(container, {
+                    text: window.location.href,
+                    width: 180,
+                    height: 180,
+                    colorDark: "#07080a",
+                    colorLight: "#ffffff",
+                    correctLevel: QRCode.CorrectLevel.H
+                });
+                qrGenerated = true;
+            }
+        }
+
+        function closeQrModal() {
+            document.getElementById('qrModal').classList.add('hidden');
+        }
+
+        function copyQuickLink() {
+            const url = window.location.href;
+            const tempInput = document.createElement('input');
+            tempInput.value = url;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+
+            const toast = document.getElementById('toastNotification');
+            toast.classList.remove('hidden');
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 2500);
+        }
+
+        // إغلاق نافذة الـ QR عند الضغط خارجها
+        document.getElementById('qrModal').addEventListener('click', (e) => {
+            if (e.target.id === 'qrModal') closeQrModal();
+        });
+    </script>
+</body>
+</html>
