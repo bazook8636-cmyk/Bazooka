@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ولاد شعبان هندي | قومية وكمبيالات السيارات</title>
+    <title>ولاد شعبان هندي | قومية وكمبيالات السيارات وتفييم الزجاج</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
@@ -16,10 +16,10 @@
 </head>
 <body class="min-h-screen flex flex-col items-center justify-between p-3 sm:p-6">
 
-    <!-- 1. شاشة البداية (اختيار دخول ضيف أو حساب دائم مع صور السيارات والفاميه) -->
+    <!-- 1. شاشة البداية (رسالة الترحيب + صور السيارات والفاميه + اختيار الدخول) -->
     <div id="welcome-screen" class="w-full max-w-md mx-auto my-auto space-y-6">
         
-        <!-- معرض صور السيارات والفاميه في الواجهة -->
+        <!-- صور السيارات والفاميه في الواجهة -->
         <div class="grid grid-cols-3 gap-2 rounded-3xl overflow-hidden border border-slate-700 shadow-2xl bg-slate-900 p-2">
             <div class="relative h-24 rounded-xl overflow-hidden">
                 <img src="https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?w=400&auto=format&fit=crop&q=80" class="w-full h-full object-cover" alt="عربية نقل">
@@ -30,18 +30,18 @@
                 <div class="absolute inset-0 bg-black/40 flex items-end p-1.5"><span class="text-[9px] font-bold text-amber-400">تفييم وفاميه</span></div>
             </div>
             <div class="relative h-24 rounded-xl overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=400&auto=format&fit=crop&q=80" class="w-full h-full object-cover" alt="ميكروباص وسبار">
+                <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=400&auto=format&fit=crop&q=80" class="w-full h-full object-cover" alt="ميكروباص">
                 <div class="absolute inset-0 bg-black/40 flex items-end p-1.5"><span class="text-[9px] font-bold text-amber-400">ميكروباصات</span></div>
             </div>
         </div>
 
-        <!-- كارت الترحيب واختيار الدخول -->
+        <!-- كارت الترحيب -->
         <div class="bg-slate-900 border border-slate-700 rounded-3xl p-6 text-center shadow-2xl space-y-6">
             <div class="w-16 h-16 bg-amber-500/10 text-amber-500 rounded-full flex items-center justify-center mx-auto text-2xl border border-amber-500/20">
                 <i class="fa-solid fa-store"></i>
             </div>
             <div>
-                <h1 class="text-xl font-black text-white leading-snug">ولاد شعبان هندي</h1>
+                <h1 class="text-xl font-black text-white leading-snug">مرحبا بك في محل ولاد شعبان هندي</h1>
                 <p class="text-amber-400 text-xs font-semibold mt-1">قومية وكمبيالات السيارات والموتوسيكلات وتفييم الزجاج</p>
             </div>
             
@@ -58,7 +58,7 @@
         </div>
     </div>
 
-    <!-- نوافذ الإدخال للضيف أو الدائم -->
+    <!-- نوافذ إدخال الاسم للضيف أو الدائم -->
     <div id="modal-guest" class="hidden-section fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-4">
         <div class="bg-slate-900 border border-slate-700 rounded-3xl p-6 max-w-sm w-full space-y-4 shadow-2xl">
             <h3 class="font-bold text-sm text-amber-400 text-center">دخول الزبون الضيف</h3>
@@ -81,7 +81,7 @@
         </div>
     </div>
 
-    <!-- 2. واجهة شات الزبون (تظهر بعد الدخول وتسمع على البوت فوراً) -->
+    <!-- 2. واجهة شات الزبون (إرسال صور، فويس، ورسايل) -->
     <div id="chat-screen" class="hidden-section flex-1 max-w-xl w-full mx-auto flex flex-col justify-between space-y-4 my-2">
         <header class="bg-slate-900 border border-slate-800 p-3.5 rounded-2xl flex items-center justify-between shadow">
             <div class="flex items-center gap-3">
@@ -95,15 +95,28 @@
         </header>
 
         <div id="chat-box" class="flex-1 bg-slate-900 border border-slate-800 rounded-2xl p-4 space-y-3 overflow-y-auto chat-scroll min-h-[50vh] max-h-[60vh]">
-            <div class="text-center text-slate-500 text-xs py-10">أهلاً بك! ابدأ بإرسال رسالتك أو طلبك للمحل، وهيوصلنا فوراً...</div>
+            <div class="text-center text-slate-500 text-xs py-10">أهلاً بك! ابدأ بإرسال صور شغلك أو الفويس أو طلبك للمحل...</div>
         </div>
 
         <div class="bg-slate-900 border border-slate-800 rounded-2xl p-3 space-y-2 shadow-xl">
             <div class="flex items-center gap-2">
                 <input type="text" id="chat-input" placeholder="اكتب رسالتك للمحل هنا..." class="flex-1 bg-slate-800 border border-slate-700 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-amber-500">
-                <button onclick="sendTextMessage()" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-5 py-3 rounded-xl text-xs transition shadow">إرسال</button>
+                <!-- زر رفع الصور -->
+                <label class="cursor-pointer bg-slate-800 hover:bg-slate-700 text-amber-400 w-11 h-11 rounded-xl flex items-center justify-center border border-slate-700 transition">
+                    <i class="fa-solid fa-image text-sm"></i>
+                    <input type="file" id="chat-img" accept="image/*" class="hidden" onchange="sendImageMessage()">
+                </label>
             </div>
-            <p class="text-[9px] text-amber-400/80 text-center">الرسائل تذهب مباشرة إلى إدارة المحل عبر تيليجرام ✅</p>
+            <div class="flex gap-2">
+                <!-- زر تسجيل الفويس -->
+                <button id="rec-btn" onclick="toggleVoiceRecording()" class="flex-1 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 py-2.5 rounded-xl text-xs font-bold transition flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-microphone text-red-500"></i>
+                    <span id="rec-txt">تسجيل فويس</span>
+                </button>
+                <!-- زر إرسال النص -->
+                <button onclick="sendTextMessage()" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-6 py-2.5 rounded-xl text-xs transition shadow">إرسال</button>
+            </div>
+            <p class="text-[9px] text-amber-400/80 text-center">الصور والفويس والرسايل تصلك مباشرة على تيليجرام ✅</p>
         </div>
     </div>
 
@@ -113,6 +126,7 @@
         const TELEGRAM_CHAT_ID = "6402034749";
 
         let currentClient = localStorage.getItem('shaban_client_session') || '';
+        let mediaRecorder, audioChunks = [];
 
         window.onload = () => {
             if(currentClient) {
@@ -175,7 +189,7 @@
             let msgs = getMessages();
             
             if(msgs.length === 0) {
-                box.innerHTML = `<div class="text-center text-slate-500 text-xs py-10">أهلاً بك يا ${currentClient}! ابدأ بإرسال رسالتك للمحل...</div>`;
+                box.innerHTML = `<div class="text-center text-slate-500 text-xs py-10">أهلاً بك يا ${currentClient}! ابدأ بإرسال صور شغلك أو رسالتك للمحل...</div>`;
                 return;
             }
 
@@ -183,13 +197,16 @@
                 <div class="flex ${m.sender === 'client' ? 'justify-end' : 'justify-start'}">
                     <div class="max-w-[85%] p-3 rounded-2xl text-xs space-y-1 ${m.sender === 'client' ? 'bg-amber-600 text-slate-950 font-bold rounded-tr-none' : 'bg-slate-800 text-white rounded-tl-none border border-amber-500/30'}">
                         <div class="text-[9px] opacity-75">${m.sender === 'client' ? currentClient : 'ولاد شعبان هندي'} • ${m.time}</div>
-                        <p class="text-sm">${m.content}</p>
+                        ${m.type === 'text' ? `<p class="text-sm">${m.content}</p>` : ''}
+                        ${m.type === 'image' ? `<img src="${m.content}" class="rounded-xl w-full max-h-48 object-cover">` : ''}
+                        ${m.type === 'voice' ? `<audio controls src="${m.content}" class="w-full h-8"></audio>` : ''}
                     </div>
                 </div>
             `).join('');
             box.scrollTop = box.scrollHeight;
         }
 
+        // إرسال رسالة نصية للبوت
         async function sendTextMessage() {
             const input = document.getElementById('chat-input');
             const txt = input.value.trim();
@@ -198,21 +215,83 @@
             let timeStr = new Date().toLocaleTimeString('ar-EG', {hour: '2-digit', minute:'2-digit'});
             
             let msgs = getMessages();
-            msgs.push({ sender: 'client', content: txt, time: timeStr });
+            msgs.push({ sender: 'client', type: 'text', content: txt, time: timeStr });
             saveMessages(msgs);
             input.value = '';
             renderMessages();
 
-            // إرسال الإشعار للبوت على تيليجرام فوراً
-            const telegramMessage = `🚨 رسالة جديدة من زبون!\n👤 الاسم: ${currentClient}\n💬 الرسالة: ${txt}\n⏰ الوقت: ${timeStr}`;
-            
+            const telegramMessage = `🚨 رسالة نصية جديدة!\n👤 الاسم: ${currentClient}\n💬 النص: ${txt}\n⏰ الوقت: ${timeStr}`;
+            sendToTelegramText(telegramMessage);
+        }
+
+        // إرسال صورة للبوت
+        async function sendImageMessage() {
+            const file = document.getElementById('chat-img').files[0];
+            if(!file) return;
+
+            const reader = new FileReader();
+            reader.onload = async function(e) {
+                const base64Img = e.target.result;
+                let timeStr = new Date().toLocaleTimeString('ar-EG', {hour: '2-digit', minute:'2-digit'});
+
+                let msgs = getMessages();
+                msgs.push({ sender: 'client', type: 'image', content: base64Img, time: timeStr });
+                saveMessages(msgs);
+                renderMessages();
+
+                // إرسال تنبيه نصي للبوت أن فيه صورة جديدة مبعوتة
+                const telegramMessage = `📸 صورة جديدة مبعوتة من زبون!\n👤 الاسم: ${currentClient}\n⏰ الوقت: ${timeStr}`;
+                sendToTelegramText(telegramMessage);
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // تسجيل وإرسال الفويس
+        async function toggleVoiceRecording() {
+            const btn = document.getElementById('rec-btn');
+            const txt = document.getElementById('rec-txt');
+
+            if(!mediaRecorder || mediaRecorder.state === 'inactive') {
+                audioChunks = [];
+                try {
+                    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                    mediaRecorder = new MediaRecorder(stream);
+                    mediaRecorder.ondataavailable = e => audioChunks.push(e.data);
+                    mediaRecorder.onstop = () => {
+                        const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
+                        const audioUrl = URL.createObjectURL(audioBlob);
+                        let timeStr = new Date().toLocaleTimeString('ar-EG', {hour: '2-digit', minute:'2-digit'});
+
+                        let msgs = getMessages();
+                        msgs.push({ sender: 'client', type: 'voice', content: audioUrl, time: timeStr });
+                        saveMessages(msgs);
+                        renderMessages();
+
+                        const telegramMessage = `🎙️ رسالة صوتية (فويس) جديدة!\n👤 الاسم: ${currentClient}\n⏰ الوقت: ${timeStr}`;
+                        sendToTelegramText(telegramMessage);
+                    };
+                    mediaRecorder.start();
+                    txt.innerText = 'جاري التسجيل...';
+                    btn.classList.add('bg-red-500/20', 'border-red-500');
+                } catch (err) {
+                    alert('عذراً، ميكروفون الموبايل غير متاح أو مرفوض الإذن.');
+                }
+            } else {
+                mediaRecorder.stop();
+                txt.innerText = 'تسجيل فويس';
+                btn.classList.remove('bg-red-500/20', 'border-red-500');
+            }
+        }
+
+        // دالة الاتصال ببوت تيليجرام
+        async function sendToTelegramText(text) {
             try {
                 await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         chat_id: TELEGRAM_CHAT_ID,
-                        text: telegramMessage
+                        text: text
                     })
                 });
             } catch (error) {
