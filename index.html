@@ -16,7 +16,7 @@
 </head>
 <body class="min-h-screen flex flex-col items-center justify-between p-3 sm:p-6">
 
-    <!-- 1. شاشة البداية (رسالة الترحيب + صور السيارات والفاميه + اختيار الدخول) -->
+    <!-- 1. شاشة الترحيب الرئيسية -->
     <div id="welcome-screen" class="w-full max-w-md mx-auto my-auto space-y-6">
         
         <!-- صور السيارات والفاميه في الواجهة -->
@@ -81,7 +81,7 @@
         </div>
     </div>
 
-    <!-- 2. واجهة شات الزبون (إرسال صور، فويس، ورسايل) -->
+    <!-- 2. واجهة شات الزبون -->
     <div id="chat-screen" class="hidden-section flex-1 max-w-xl w-full mx-auto flex flex-col justify-between space-y-4 my-2">
         <header class="bg-slate-900 border border-slate-800 p-3.5 rounded-2xl flex items-center justify-between shadow">
             <div class="flex items-center gap-3">
@@ -116,12 +116,11 @@
                 <!-- زر إرسال النص -->
                 <button onclick="sendTextMessage()" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-6 py-2.5 rounded-xl text-xs transition shadow">إرسال</button>
             </div>
-            <p class="text-[9px] text-amber-400/80 text-center">الصور والفويس والرسايل تصلك مباشرة على تيليجرام ✅</p>
+            <p class="text-[9px] text-amber-400/80 text-center">الصور الحقيقية والفويس والرسايل تصلك مباشرة على تيليجرام ✅</p>
         </div>
     </div>
 
     <script>
-        // بيانات بوت التيليجرام الخاصة بك
         const TELEGRAM_BOT_TOKEN = "9092607150:AAH5MMRWqawNYQlyQ6mSKE2zzniF3mrLgmw"; 
         const TELEGRAM_CHAT_ID = "6402034749";
 
@@ -224,26 +223,41 @@
             sendToTelegramText(telegramMessage);
         }
 
-        // إرسال صورة للبوت
+        // إرسال ملف الصورة الحقيقي للبوت باستخدام sendPhoto
         async function sendImageMessage() {
-            const file = document.getElementById('chat-img').files[0];
+            const fileInput = document.getElementById('chat-img');
+            const file = fileInput.files[0];
             if(!file) return;
 
+            let timeStr = new Date().toLocaleTimeString('ar-EG', {hour: '2-digit', minute:'2-digit'});
+
+            // قراءة الصورة لعرضها في شاشة الزبون محلياً
             const reader = new FileReader();
             reader.onload = async function(e) {
                 const base64Img = e.target.result;
-                let timeStr = new Date().toLocaleTimeString('ar-EG', {hour: '2-digit', minute:'2-digit'});
-
                 let msgs = getMessages();
                 msgs.push({ sender: 'client', type: 'image', content: base64Img, time: timeStr });
                 saveMessages(msgs);
                 renderMessages();
-
-                // إرسال تنبيه نصي للبوت أن فيه صورة جديدة مبعوتة
-                const telegramMessage = `📸 صورة جديدة مبعوتة من زبون!\n👤 الاسم: ${currentClient}\n⏰ الوقت: ${timeStr}`;
-                sendToTelegramText(telegramMessage);
             };
             reader.readAsDataURL(file);
+
+            // إرسال الصورة كملف حقيقي إلى تيليجرام
+            const formData = new FormData();
+            formData.append('chat_id', TELEGRAM_CHAT_ID);
+            formData.append('photo', file);
+            formData.append('caption', `📸 صورة جديدة من الزبون!\n👤 الاسم: ${currentClient}\n⏰ الوقت: ${timeStr}`);
+
+            try {
+                await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendPhoto`, {
+                    method: 'POST',
+                    body: formData
+                });
+            } catch (error) {
+                console.error("خطأ في إرسال الصورة للبوت:", error);
+            }
+
+            fileInput.value = ''; // تصفير حقل الاختيار
         }
 
         // تسجيل وإرسال الفويس
@@ -257,7 +271,7 @@
                     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
                     mediaRecorder = new MediaRecorder(stream);
                     mediaRecorder.ondataavailable = e => audioChunks.push(e.data);
-                    mediaRecorder.onstop = () => {
+                    mediaRecorder.onstop = async () => {
                         const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
                         const audioUrl = URL.createObjectURL(audioBlob);
                         let timeStr = new Date().toLocaleTimeString('ar-EG', {hour: '2-digit', minute:'2-digit'});
@@ -267,8 +281,20 @@
                         saveMessages(msgs);
                         renderMessages();
 
-                        const telegramMessage = `🎙️ رسالة صوتية (فويس) جديدة!\n👤 الاسم: ${currentClient}\n⏰ الوقت: ${timeStr}`;
-                        sendToTelegramText(telegramMessage);
+                        // إرسال الفويس كملف صوتي حقيقي للبوت
+                        const formData = new FormData();
+                        formData.append('chat_id', TELEGRAM_CHAT_ID);
+                        formData.append('voice', audioBlob, 'voice_message.webm');
+                        formData.append('caption', `🎙️ رسالة صوتية (فويس) من الزبون!\n👤 الاسم: ${currentClient}\n⏰ الوقت: ${timeStr}`);
+
+                        try {
+                            await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendVoice`, {
+                                method: 'POST',
+                                body: formData
+                            });
+                        } catch (error) {
+                            console.error("خطأ في إرسال الفويس للبوت:", error);
+                        }
                     };
                     mediaRecorder.start();
                     txt.innerText = 'جاري التسجيل...';
@@ -283,7 +309,7 @@
             }
         }
 
-        // دالة الاتصال ببوت تيليجرام
+        // دالة إرسال النصوص العادية
         async function sendToTelegramText(text) {
             try {
                 await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
