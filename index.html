@@ -3,31 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ولاد شعبان هندي | شات الزبائن المباشر</title>
+    <title>ولاد شعبان هندي | قومية وكمبيالات السيارات</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Cairo', sans-serif; background-color: #0f172a; color: #f8fafc; }
+        .hidden-section { display: none; }
         .chat-scroll::-webkit-scrollbar { width: 5px; }
         .chat-scroll::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
     </style>
 </head>
-<body class="min-h-screen flex flex-col items-center justify-center p-2 sm:p-4">
+<body class="min-h-screen flex flex-col items-center justify-between p-3 sm:p-6">
 
-    <!-- واجهة شات الزبون -->
-    <div class="flex-1 max-w-xl w-full mx-auto flex flex-col justify-between space-y-4 my-2">
+    <!-- 1. شاشة البداية (اختيار دخول ضيف أو حساب دائم مع صور السيارات والفاميه) -->
+    <div id="welcome-screen" class="w-full max-w-md mx-auto my-auto space-y-6">
+        
+        <!-- معرض صور السيارات والفاميه في الواجهة -->
+        <div class="grid grid-cols-3 gap-2 rounded-3xl overflow-hidden border border-slate-700 shadow-2xl bg-slate-900 p-2">
+            <div class="relative h-24 rounded-xl overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?w=400&auto=format&fit=crop&q=80" class="w-full h-full object-cover" alt="عربية نقل">
+                <div class="absolute inset-0 bg-black/40 flex items-end p-1.5"><span class="text-[9px] font-bold text-amber-400">نقل ثقيل</span></div>
+            </div>
+            <div class="relative h-24 rounded-xl overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=400&auto=format&fit=crop&q=80" class="w-full h-full object-cover" alt="تفييم سيارات">
+                <div class="absolute inset-0 bg-black/40 flex items-end p-1.5"><span class="text-[9px] font-bold text-amber-400">تفييم وفاميه</span></div>
+            </div>
+            <div class="relative h-24 rounded-xl overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=400&auto=format&fit=crop&q=80" class="w-full h-full object-cover" alt="ميكروباص وسبار">
+                <div class="absolute inset-0 bg-black/40 flex items-end p-1.5"><span class="text-[9px] font-bold text-amber-400">ميكروباصات</span></div>
+            </div>
+        </div>
+
+        <!-- كارت الترحيب واختيار الدخول -->
+        <div class="bg-slate-900 border border-slate-700 rounded-3xl p-6 text-center shadow-2xl space-y-6">
+            <div class="w-16 h-16 bg-amber-500/10 text-amber-500 rounded-full flex items-center justify-center mx-auto text-2xl border border-amber-500/20">
+                <i class="fa-solid fa-store"></i>
+            </div>
+            <div>
+                <h1 class="text-xl font-black text-white leading-snug">ولاد شعبان هندي</h1>
+                <p class="text-amber-400 text-xs font-semibold mt-1">قومية وكمبيالات السيارات والموتوسيكلات وتفييم الزجاج</p>
+            </div>
+            
+            <div class="space-y-3 pt-2">
+                <button onclick="openModal('guest')" class="w-full bg-slate-800 hover:bg-slate-700 border border-slate-600 p-3.5 rounded-2xl font-bold transition flex items-center justify-between shadow text-xs">
+                    <span>تسجيل الدخول ضيف</span>
+                    <i class="fa-solid fa-user text-amber-500 text-base"></i>
+                </button>
+                <button onclick="openModal('register')" class="w-full bg-slate-800 hover:bg-slate-700 border border-slate-600 p-3.5 rounded-2xl font-bold transition flex items-center justify-between shadow text-xs">
+                    <span>تسجيل الدخول دائم</span>
+                    <i class="fa-solid fa-user-check text-amber-500 text-base"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- نوافذ الإدخال للضيف أو الدائم -->
+    <div id="modal-guest" class="hidden-section fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-700 rounded-3xl p-6 max-w-sm w-full space-y-4 shadow-2xl">
+            <h3 class="font-bold text-sm text-amber-400 text-center">دخول الزبون الضيف</h3>
+            <input type="text" id="g-name" placeholder="اكتب اسمك أو رقمك هنا..." class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-amber-500">
+            <div class="flex gap-2 pt-2">
+                <button onclick="closeModals()" class="flex-1 bg-slate-800 py-3 rounded-xl text-xs font-semibold">إلغاء</button>
+                <button onclick="loginUser('ضيف')" class="flex-1 bg-amber-500 text-slate-950 py-3 rounded-xl text-xs font-black">بدء الشات</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-register" class="hidden-section fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-700 rounded-3xl p-6 max-w-sm w-full space-y-4 shadow-2xl">
+            <h3 class="font-bold text-sm text-amber-400 text-center">تسجيل الدخول الدائم</h3>
+            <input type="text" id="r-name" placeholder="الاسم الكريم أو اللقب..." class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-amber-500">
+            <div class="flex gap-2 pt-2">
+                <button onclick="closeModals()" class="flex-1 bg-slate-800 py-3 rounded-xl text-xs font-semibold">إلغاء</button>
+                <button onclick="loginUser('دائم')" class="flex-1 bg-amber-500 text-slate-950 py-3 rounded-xl text-xs font-black">حفظ ودخول</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. واجهة شات الزبون (تظهر بعد الدخول وتسمع على البوت فوراً) -->
+    <div id="chat-screen" class="hidden-section flex-1 max-w-xl w-full mx-auto flex flex-col justify-between space-y-4 my-2">
         <header class="bg-slate-900 border border-slate-800 p-3.5 rounded-2xl flex items-center justify-between shadow">
             <div class="flex items-center gap-3">
                 <div class="w-9 h-9 bg-amber-500 text-slate-950 font-black rounded-xl flex items-center justify-center text-base">ش</div>
                 <div>
                     <h2 class="font-bold text-sm leading-tight">محل ولاد شعبان هندي</h2>
-                    <p class="text-[10px] text-amber-400">قومية وكمبيالات السيارات والموتوسيكلات</p>
+                    <p id="user-display-tag" class="text-[10px] text-amber-400">متصل الآن</p>
                 </div>
             </div>
-            <div class="text-[10px] bg-emerald-500/10 text-emerald-400 px-2.5 py-1 rounded-lg border border-emerald-500/20 font-bold">
-                <i class="fa-solid fa-circle text-[8px] ml-1 animate-pulse"></i> متصل الآن
-            </div>
+            <button onclick="logout()" class="bg-red-500/10 text-red-400 px-3 py-1.5 rounded-xl text-[10px] font-bold border border-red-500/20">خروج</button>
         </header>
 
         <div id="chat-box" class="flex-1 bg-slate-900 border border-slate-800 rounded-2xl p-4 space-y-3 overflow-y-auto chat-scroll min-h-[50vh] max-h-[60vh]">
@@ -35,17 +99,11 @@
         </div>
 
         <div class="bg-slate-900 border border-slate-800 rounded-2xl p-3 space-y-2 shadow-xl">
-            <!-- تسجيل اسم الزبون الأول عشان يوصلك في رسالة البوت -->
-            <div id="client-name-box" class="flex gap-2 pb-1 border-b border-slate-800">
-                <input type="text" id="client-name-input" placeholder="اكتب اسمك أو رقمك هنا الأول..." class="flex-1 bg-slate-800 border border-slate-700 rounded-xl p-2 text-xs text-white focus:outline-none focus:border-amber-500">
-                <button onclick="saveClientName()" class="bg-amber-500 text-slate-950 font-bold px-4 py-2 rounded-xl text-xs">حفظ الاسم</button>
-            </div>
-
             <div class="flex items-center gap-2">
-                <input type="text" id="chat-input" placeholder="اكتب رسالتك هنا..." class="flex-1 bg-slate-800 border border-slate-700 rounded-xl p-3 text-sm focus:outline-none focus:border-amber-500 text-white" disabled>
-                <button onclick="sendTextMessage()" id="send-btn" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-6 py-3 rounded-xl text-xs transition shadow opacity-50 cursor-not-allowed" disabled>إرسال</button>
+                <input type="text" id="chat-input" placeholder="اكتب رسالتك للمحل هنا..." class="flex-1 bg-slate-800 border border-slate-700 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-amber-500">
+                <button onclick="sendTextMessage()" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-5 py-3 rounded-xl text-xs transition shadow">إرسال</button>
             </div>
-            <p id="status-note" class="text-[10px] text-amber-400 text-center">أدخل اسمك أولاً لتتمكن من مراسلة المحل</p>
+            <p class="text-[9px] text-amber-400/80 text-center">الرسائل تذهب مباشرة إلى إدارة المحل عبر تيليجرام ✅</p>
         </div>
     </div>
 
@@ -54,41 +112,62 @@
         const TELEGRAM_BOT_TOKEN = "9092607150:AAH5MMRWqawNYQlyQ6mSKE2zzniF3mrLgmw"; 
         const TELEGRAM_CHAT_ID = "6402034749";
 
-        let clientName = localStorage.getItem('shaban_client_name') || '';
+        let currentClient = localStorage.getItem('shaban_client_session') || '';
 
         window.onload = () => {
-            if(clientName) {
-                document.getElementById('client-name-input').value = clientName;
-                enableChat();
+            if(currentClient) {
+                showChatScreen();
+            } else {
+                showWelcomeScreen();
             }
-            renderMessages();
         };
 
-        function saveClientName() {
-            const nameInput = document.getElementById('client-name-input').value.trim();
-            if(!nameInput) {
+        function openModal(type) {
+            closeModals();
+            document.getElementById('modal-' + type).style.display = 'flex';
+        }
+
+        function closeModals() {
+            document.querySelectorAll('.fixed').forEach(el => el.style.display = 'none');
+        }
+
+        function loginUser(type) {
+            const inputId = type === 'ضيف' ? 'g-name' : 'r-name';
+            const name = document.getElementById(inputId).value.trim();
+            if(!name) {
                 alert('اكتب اسمك يا أسطى الأول!');
                 return;
             }
-            clientName = nameInput;
-            localStorage.setItem('shaban_client_name', clientName);
-            enableChat();
-            alert('تم حفظ اسمك، تقدر تبعت رسايلك دلوقتي!');
+            currentClient = name + ` (${type})`;
+            localStorage.setItem('shaban_client_session', currentClient);
+            closeModals();
+            showChatScreen();
         }
 
-        function enableChat() {
-            document.getElementById('chat-input').removeAttribute('disabled');
-            document.getElementById('send-btn').removeAttribute('disabled');
-            document.getElementById('send-btn').classList.remove('opacity-50', 'cursor-not-allowed');
-            document.getElementById('status-note').innerText = 'متصل بالمحل عبر البوت ✅';
+        function logout() {
+            localStorage.removeItem('shaban_client_session');
+            currentClient = '';
+            showWelcomeScreen();
+        }
+
+        function showWelcomeScreen() {
+            document.getElementById('welcome-screen').style.display = 'block';
+            document.getElementById('chat-screen').style.display = 'none';
+        }
+
+        function showChatScreen() {
+            document.getElementById('welcome-screen').style.display = 'none';
+            document.getElementById('chat-screen').style.display = 'flex';
+            document.getElementById('user-display-tag').innerText = 'المستخدم: ' + currentClient;
+            renderMessages();
         }
 
         function getMessages() {
-            return JSON.parse(localStorage.getItem('shaban_bot_chat') || '[]');
+            return JSON.parse(localStorage.getItem('shaban_direct_chat_msgs') || '[]');
         }
 
         function saveMessages(msgs) {
-            localStorage.setItem('shaban_bot_chat', JSON.stringify(msgs));
+            localStorage.setItem('shaban_direct_chat_msgs', JSON.stringify(msgs));
         }
 
         function renderMessages() {
@@ -96,14 +175,14 @@
             let msgs = getMessages();
             
             if(msgs.length === 0) {
-                box.innerHTML = `<div class="text-center text-slate-500 text-xs py-10">أهلاً بك يا ${clientName || 'زائرنا الكريم'}! ابدأ بإرسال رسالتك للمحل...</div>`;
+                box.innerHTML = `<div class="text-center text-slate-500 text-xs py-10">أهلاً بك يا ${currentClient}! ابدأ بإرسال رسالتك للمحل...</div>`;
                 return;
             }
 
             box.innerHTML = msgs.map(m => `
                 <div class="flex ${m.sender === 'client' ? 'justify-end' : 'justify-start'}">
                     <div class="max-w-[85%] p-3 rounded-2xl text-xs space-y-1 ${m.sender === 'client' ? 'bg-amber-600 text-slate-950 font-bold rounded-tr-none' : 'bg-slate-800 text-white rounded-tl-none border border-amber-500/30'}">
-                        <div class="text-[9px] opacity-75">${m.sender === 'client' ? clientName : 'ولاد شعبان هندي'} • ${m.time}</div>
+                        <div class="text-[9px] opacity-75">${m.sender === 'client' ? currentClient : 'ولاد شعبان هندي'} • ${m.time}</div>
                         <p class="text-sm">${m.content}</p>
                     </div>
                 </div>
@@ -115,10 +194,6 @@
             const input = document.getElementById('chat-input');
             const txt = input.value.trim();
             if(!txt) return;
-            if(!clientName) {
-                alert('من فضلك ادخل اسمك فوق الأول!');
-                return;
-            }
 
             let timeStr = new Date().toLocaleTimeString('ar-EG', {hour: '2-digit', minute:'2-digit'});
             
@@ -128,8 +203,8 @@
             input.value = '';
             renderMessages();
 
-            // إرسال الإشعار للبوت على تيليجرام
-            const telegramMessage = `🚨 رسالة جديدة من زبون!\n👤 الاسم: ${clientName}\n💬 الرسالة: ${txt}\n⏰ الوقت: ${timeStr}`;
+            // إرسال الإشعار للبوت على تيليجرام فوراً
+            const telegramMessage = `🚨 رسالة جديدة من زبون!\n👤 الاسم: ${currentClient}\n💬 الرسالة: ${txt}\n⏰ الوقت: ${timeStr}`;
             
             try {
                 await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
