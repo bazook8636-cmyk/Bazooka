@@ -19,7 +19,7 @@
     <!-- 1. شاشة الترحيب الرئيسية -->
     <div id="welcome-screen" class="w-full max-w-md mx-auto my-auto space-y-6">
         
-        <!-- صور السيارات والفاميه في الواجهة -->
+        <!-- معرض صور السيارات والفاميه في الواجهة -->
         <div class="grid grid-cols-3 gap-2 rounded-3xl overflow-hidden border border-slate-700 shadow-2xl bg-slate-900 p-2">
             <div class="relative h-24 rounded-xl overflow-hidden">
                 <img src="https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?w=400&auto=format&fit=crop&q=80" class="w-full h-full object-cover" alt="عربية نقل">
@@ -231,7 +231,6 @@
 
             let timeStr = new Date().toLocaleTimeString('ar-EG', {hour: '2-digit', minute:'2-digit'});
 
-            // قراءة الصورة لعرضها في شاشة الزبون محلياً
             const reader = new FileReader();
             reader.onload = async function(e) {
                 const base64Img = e.target.result;
@@ -242,11 +241,10 @@
             };
             reader.readAsDataURL(file);
 
-            // إرسال الصورة كملف حقيقي إلى تيليجرام
             const formData = new FormData();
             formData.append('chat_id', TELEGRAM_CHAT_ID);
             formData.append('photo', file);
-            formData.append('caption', `📸 صورة جديدة من الزبون!\n👤 الاسم: ${currentClient}\n⏰ الوقت: ${timeStr}`);
+            formData.append('caption', `📸 صورة جديدة مرسلة من الزبون!\n👤 الاسم: ${currentClient}\n⏰ الوقت: ${timeStr}`);
 
             try {
                 await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendPhoto`, {
@@ -257,10 +255,10 @@
                 console.error("خطأ في إرسال الصورة للبوت:", error);
             }
 
-            fileInput.value = ''; // تصفير حقل الاختيار
+            fileInput.value = '';
         }
 
-        // تسجيل وإرسال الفويس
+        // تسجيل وإرسال الفويس كملف صوتي حقيقي
         async function toggleVoiceRecording() {
             const btn = document.getElementById('rec-btn');
             const txt = document.getElementById('rec-txt');
@@ -281,11 +279,10 @@
                         saveMessages(msgs);
                         renderMessages();
 
-                        // إرسال الفويس كملف صوتي حقيقي للبوت
                         const formData = new FormData();
                         formData.append('chat_id', TELEGRAM_CHAT_ID);
                         formData.append('voice', audioBlob, 'voice_message.webm');
-                        formData.append('caption', `🎙️ رسالة صوتية (فويس) من الزبون!\n👤 الاسم: ${currentClient}\n⏰ الوقت: ${timeStr}`);
+                        formData.append('caption', `🎙️ رسالة صوتية (فويس) مرسلة من:\n👤 الاسم: ${currentClient}\n⏰ الوقت: ${timeStr}`);
 
                         try {
                             await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendVoice`, {
@@ -309,7 +306,6 @@
             }
         }
 
-        // دالة إرسال النصوص العادية
         async function sendToTelegramText(text) {
             try {
                 await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
