@@ -3,20 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ولاد شعبان هندي | شات ومتابعة الطلبات</title>
+    <title>ولاد شعبان هندي | نظام الشات المتكامل</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Cairo', sans-serif; background-color: #0f172a; color: #f8fafc; }
         .hidden-section { display: none; }
-        .chat-scroll { scrollbar-width: thin; }
+        .chat-scroll::-webkit-scrollbar { width: 6px; }
+        .chat-scroll::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
     </style>
 </head>
 <body class="min-h-screen flex flex-col">
 
     <!-- شاشة الترحيب وتحديد نوع الزبون -->
-    <div id="welcome-modal" class="fixed inset-0 bg-black/85 z-50 flex items-center justify-center p-4">
+    <div id="welcome-modal" class="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4">
         <div class="bg-slate-900 border border-slate-700 rounded-3xl p-6 max-w-sm w-full text-center shadow-2xl space-y-4">
             <div class="w-20 h-20 bg-amber-500/10 text-amber-500 rounded-full flex items-center justify-center mx-auto text-3xl">
                 <i class="fa-solid fa-store"></i>
@@ -25,14 +26,14 @@
                 <h2 class="text-2xl font-black text-white">ولاد شعبان هندي</h2>
                 <p class="text-slate-400 text-xs mt-1">قومية وكمبيالات السيارات والموتوسيكلات</p>
             </div>
-            <p class="text-sm bg-slate-800/80 p-3 rounded-2xl border border-slate-700 text-slate-300">اختر طريقة التعامل لتجربة أفضل:</p>
+            <p class="text-sm bg-slate-800/80 p-3 rounded-2xl border border-slate-700 text-slate-300">أهلاً بك! اختر طريقة الدخول:</p>
             <div class="space-y-3 pt-2">
                 <button onclick="setCustomerMode('عابر')" class="w-full bg-slate-800 hover:bg-slate-700 border border-slate-600 p-4 rounded-2xl font-bold transition flex items-center justify-between shadow">
-                    <span class="text-sm">زبون عابر (شغل سريع وأمشي)</span>
-                    <i class="fa-solid fa-person-running text-amber-500 text-lg"></i>
+                    <span class="text-sm">دخول سريع كضيف</span>
+                    <i class="fa-solid fa-user-secret text-amber-500 text-lg"></i>
                 </button>
                 <button onclick="showRegisterModal()" class="w-full bg-amber-600 hover:bg-amber-500 text-slate-950 p-4 rounded-2xl font-black transition flex items-center justify-between shadow-lg">
-                    <span class="text-sm">زبون دائم (تسجيل حساب خاصة بي)</span>
+                    <span class="text-sm">تسجيل حساب دائم</span>
                     <i class="fa-solid fa-id-card text-lg"></i>
                 </button>
             </div>
@@ -40,7 +41,7 @@
     </div>
 
     <!-- نافذة تسجيل الزبون الدائم -->
-    <div id="register-modal" class="hidden-section fixed inset-0 bg-black/85 z-50 flex items-center justify-center p-4">
+    <div id="register-modal" class="hidden-section fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4">
         <div class="bg-slate-900 border border-slate-700 rounded-3xl p-6 max-w-sm w-full space-y-4 shadow-2xl">
             <div class="flex items-center justify-between border-b border-slate-800 pb-3">
                 <h3 class="font-bold text-base text-amber-400">انضم لزبائننا المميزين</h3>
@@ -62,19 +63,19 @@
         </div>
     </div>
 
-    <!-- الشريط العلوي (منطقة الضغط السري 5 مرات لدخول الأدمن بدون إظهار الباسورد للزبون) -->
+    <!-- الشريط العلوي (منطقة الضغط السري 5 مرات لدخول الأدمن) -->
     <header id="admin-secret-trigger" class="bg-slate-900 border-b border-slate-800 p-4 shadow-md sticky top-0 z-40 cursor-pointer select-none">
         <div class="max-w-xl mx-auto flex items-center justify-between pointer-events-none">
             <div class="flex items-center gap-3">
                 <div class="w-10 h-10 bg-amber-500 text-slate-950 font-black rounded-xl flex items-center justify-center text-lg shadow">ش</div>
                 <div>
                     <h1 class="font-black text-base leading-tight">ولاد شعبان هندي</h1>
-                    <p class="text-[11px] text-amber-400">نظام الشات ومتابعة الطلبات</p>
+                    <p class="text-[11px] text-amber-400">نظام الشات المباشر ومتابعة الطلبات</p>
                 </div>
             </div>
             <div class="text-right">
                 <span id="badge-name" class="block text-xs font-bold text-white">زائر</span>
-                <span id="badge-mode" class="text-[10px] bg-slate-800 text-amber-400 px-2 py-0.5 rounded-full border border-slate-700">زبون عابر</span>
+                <span id="badge-mode" class="text-[10px] bg-slate-800 text-amber-400 px-2 py-0.5 rounded-full border border-slate-700">دخول ضيف</span>
             </div>
         </div>
     </header>
@@ -87,7 +88,7 @@
         </div>
 
         <!-- صندوق المحادثة -->
-        <div id="chat-box" class="flex-1 bg-slate-900 border border-slate-800 rounded-2xl p-4 space-y-4 overflow-y-auto chat-scroll max-h-[50vh]">
+        <div id="chat-box" class="flex-1 bg-slate-900 border border-slate-800 rounded-2xl p-4 space-y-4 overflow-y-auto chat-scroll max-h-[45vh]">
             <div class="text-center text-slate-500 text-xs py-4">ابتدئ المحادثة مع المحل الآن...</div>
         </div>
 
@@ -115,21 +116,42 @@
 
     <!-- لوحة تحكم الأدمن (مخفية تماماً) -->
     <div id="admin-chat-view" class="hidden-section flex-1 max-w-2xl w-full mx-auto p-4 space-y-4">
-        <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl flex items-center justify-between sticky top-20 z-30 shadow-lg">
-            <div>
-                <h2 class="font-black text-amber-400 text-base flex items-center gap-2"><i class="fa-solid fa-eye text-red-400"></i>لوحة إدارة الشاتات</h2>
-                <p class="text-xs text-slate-400">متابعة وحفظ شغل الزبائن</p>
+        <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl sticky top-20 z-30 shadow-lg space-y-3">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h2 class="font-black text-amber-400 text-base flex items-center gap-2"><i class="fa-solid fa-shield-halved text-emerald-400"></i>لوحة إدارة الشاتات والطلبات</h2>
+                    <p class="text-xs text-slate-400">تحكم كامل، مراسلة حرة، وحفظ الصور</p>
+                </div>
+                <button onclick="logoutAdmin()" class="bg-red-500/10 hover:bg-red-500/20 text-red-400 px-4 py-2 rounded-xl text-xs font-bold border border-red-500/30 transition">خروج</button>
             </div>
-            <button onclick="logoutAdmin()" class="bg-red-500/10 hover:bg-red-500/20 text-red-400 px-4 py-2 rounded-xl text-xs font-bold border border-red-500/30 transition">خروج</button>
+
+            <!-- أزرار الردود السريعة للأدمن -->
+            <div class="flex flex-wrap gap-1.5 pt-2 border-t border-slate-800">
+                <button onclick="sendQuickReply('تم تخليص شغلك بنجاح ✅')" class="bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/30 px-3 py-1.5 rounded-lg text-xs font-bold transition">تم تخليص شغلك بنجاح ✅</button>
+                <button onclick="sendQuickReply('تم حفظ الصورة بنجاح وشكراً لك 📸')" class="bg-blue-500/20 hover:bg-blue-500/30 text-blue-300 border border-blue-500/30 px-3 py-1.5 rounded-lg text-xs font-bold transition">تم حفظ الصورة بنجاح 📸</button>
+                <button onclick="sendQuickReply('جاري العمل على سيارتك/موتوسيكلك 🔧')" class="bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/30 px-3 py-1.5 rounded-lg text-xs font-bold transition">جاري العمل على شغلك 🔧</button>
+            </div>
+
+            <!-- منطقة إرسال رسالة مخصصة أو صورة من الأدمن -->
+            <div class="flex items-center gap-2 pt-2 border-t border-slate-800">
+                <input type="text" id="admin-custom-input" placeholder="اكتب رسالة مخصصة للزبون..." class="flex-1 bg-slate-950 border border-slate-700 rounded-xl p-2.5 text-xs text-white focus:outline-none focus:border-amber-500">
+                <label class="cursor-pointer bg-slate-800 hover:bg-slate-700 text-amber-400 px-3 py-2.5 rounded-xl border border-slate-700 text-xs font-bold transition flex items-center gap-1">
+                    <i class="fa-solid fa-image"></i> صورة
+                    <input type="file" id="admin-image-input" accept="image/*" class="hidden" onchange="sendAdminImage()">
+                </label>
+                <button onclick="sendAdminCustomMessage()" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-4 py-2.5 rounded-xl text-xs transition shadow flex items-center gap-1">
+                    <i class="fa-solid fa-paper-plane"></i> إرسال للزبون
+                </button>
+            </div>
         </div>
 
         <div id="admin-chats-container" class="space-y-4">
-            <div class="bg-slate-900 border border-slate-800 p-8 rounded-2xl text-center text-slate-500 text-sm">جاري تحميل الشابات...</div>
+            <div class="bg-slate-900 border border-slate-800 p-8 rounded-2xl text-center text-slate-500 text-sm">جاري تحميل الشات...</div>
         </div>
     </div>
 
     <!-- نافذة إدخال باسورد الأدمن (مخفية) -->
-    <div id="password-modal" class="hidden-section fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4">
+    <div id="password-modal" class="hidden-section fixed inset-0 bg-black/90 z-20 flex items-center justify-center p-4">
         <div class="bg-slate-900 border border-slate-700 rounded-3xl p-6 max-w-xs w-full text-center space-y-4 shadow-2xl">
             <div class="w-16 h-16 bg-red-500/10 text-red-400 rounded-full flex items-center justify-center mx-auto text-2xl">
                 <i class="fa-solid fa-lock"></i>
@@ -144,7 +166,7 @@
     </div>
 
     <script>
-        let currentUser = { name: 'زائر', phone: 'بدون', mode: 'عابر', pass: '' };
+        let currentUser = { name: 'زائر', phone: 'بدون', mode: 'دخول ضيف', pass: '' };
         let clickCount = 0;
         let clickTimer = null;
         let mediaRecorder;
@@ -173,7 +195,7 @@
                 return;
             }
 
-            currentUser = { name, phone: phone || 'بدون', mode: 'دائم', pass };
+            currentUser = { name, phone: phone || 'بدون', mode: 'حساب دائم', pass };
             localStorage.setItem('shaban_vip_user', JSON.stringify(currentUser));
             updateHeader();
             document.getElementById('register-modal').style.display = 'none';
@@ -182,10 +204,10 @@
 
         function updateHeader() {
             document.getElementById('badge-name').innerText = currentUser.name;
-            document.getElementById('badge-mode').innerText = 'زبون ' + currentUser.mode;
+            document.getElementById('badge-mode').innerText = currentUser.mode;
         }
 
-        // سرية تامة: 5 ضغطات على الشريط العلوي تفتح شاشة الباسورد (الزبون مش هيدري بحاجة)
+        // 5 ضغطات على الشريط العلوي تفتح شاشة الباسورد (128)
         document.getElementById('admin-secret-trigger').addEventListener('click', () => {
             clickCount++;
             clearTimeout(clickTimer);
@@ -241,10 +263,10 @@
             }
             box.innerHTML = msgs.map(m => `
                 <div class="flex ${m.sender === 'client' ? 'justify-end' : 'justify-start'}">
-                    <div class="max-w-[80%] p-3 rounded-2xl text-xs space-y-1 ${m.sender === 'client' ? 'bg-amber-600 text-slate-950 font-bold rounded-tr-none' : 'bg-slate-800 text-white rounded-tl-none border border-slate-700'}">
+                    <div class="max-w-[85%] p-3 rounded-2xl text-xs space-y-1 ${m.sender === 'client' ? 'bg-amber-600 text-slate-950 font-bold rounded-tr-none' : 'bg-slate-800 text-white rounded-tl-none border border-amber-500/40 shadow-md'}">
                         <div class="text-[10px] opacity-75">${m.sender === 'client' ? currentUser.name : 'ولاد شعبان هندي'} • ${m.time}</div>
                         ${m.type === 'text' ? `<p class="text-sm">${m.content}</p>` : ''}
-                        ${m.type === 'image' ? `<div class="space-y-1"><img src="${m.content}" class="rounded-xl w-full max-h-48 object-cover"><a href="${m.content}" download="chat-image.jpg" class="block bg-slate-950/20 text-center py-1 rounded-lg underline text-[10px]">حفظ الصورة</a></div>` : ''}
+                        ${m.type === 'image' ? `<div class="space-y-1"><img src="${m.content}" class="rounded-xl w-full max-h-48 object-cover"><a href="${m.content}" download="chat-image.jpg" class="block bg-slate-950/20 text-center py-1.5 rounded-lg underline text-[10px] font-bold"><i class="fa-solid fa-download"></i> حفظ الصورة</a></div>` : ''}
                         ${m.type === 'voice' ? `<div class="space-y-1"><audio controls src="${m.content}" class="w-full h-8"></audio></div>` : ''}
                     </div>
                 </div>
@@ -257,6 +279,27 @@
             if(!input.value.trim()) return;
             saveChatMessage({ sender: 'client', type: 'text', content: input.value, time: new Date().toLocaleTimeString('ar-EG', {hour: '2-digit', minute:'2-digit'}) });
             input.value = '';
+        }
+
+        function sendQuickReply(text) {
+            saveChatMessage({ sender: 'admin', type: 'text', content: text, time: new Date().toLocaleTimeString('ar-EG', {hour: '2-digit', minute:'2-digit'}) });
+        }
+
+        function sendAdminCustomMessage() {
+            const input = document.getElementById('admin-custom-input');
+            if(!input.value.trim()) return;
+            saveChatMessage({ sender: 'admin', type: 'text', content: input.value, time: new Date().toLocaleTimeString('ar-EG', {hour: '2-digit', minute:'2-digit'}) });
+            input.value = '';
+        }
+
+        function sendAdminImage() {
+            const file = document.getElementById('admin-image-input').files[0];
+            if(!file) return;
+            const reader = new FileReader();
+            reader.onload = e => {
+                saveChatMessage({ sender: 'admin', type: 'image', content: e.target.result, time: new Date().toLocaleTimeString('ar-EG', {hour: '2-digit', minute:'2-digit'}) });
+            };
+            reader.readAsDataURL(file);
         }
 
         function sendImageMessage() {
@@ -282,12 +325,14 @@
                     saveChatMessage({ sender: 'client', type: 'voice', content: URL.createObjectURL(audioBlob), time: new Date().toLocaleTimeString('ar-EG', {hour: '2-digit', minute:'2-digit'}) });
                 };
                 mediaRecorder.start();
-                txt.innerText = 'جاري التسجيل... اضغط للإرسال';
-                btn.classList.replace('bg-slate-800', 'bg-red-500/20');
+                txt.innerText = 'جاري التسجيل... اضغط للإيقاف';
+                btn.classList.replace('bg-slate-800', 'bg-red-500/30');
+                btn.classList.add('border-red-500');
             } else {
                 mediaRecorder.stop();
                 txt.innerText = 'اضغط لتسجيل فويس';
-                btn.classList.replace('bg-red-500/20', 'bg-slate-800');
+                btn.classList.replace('bg-red-500/30', 'bg-slate-800');
+                btn.classList.remove('border-red-500');
             }
         }
 
@@ -299,7 +344,7 @@
                 return;
             }
             container.innerHTML = `
-                <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl space-y-3">
+                <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl space-y-3 shadow-lg">
                     <div class="flex items-center justify-between border-b border-slate-800 pb-2">
                         <div>
                             <h3 class="font-bold text-amber-400 text-sm">سجل المحادثة المباشرة مع الزبائن</h3>
@@ -307,16 +352,16 @@
                         </div>
                         <button onclick="clearChat()" class="text-xs text-red-400 hover:underline bg-red-500/10 px-2 py-1 rounded">مسح الشات</button>
                     </div>
-                    <div class="space-y-3 max-h-[60vh] overflow-y-auto p-2">
+                    <div class="space-y-3 max-h-[50vh] overflow-y-auto p-2">
                         ${msgs.map(m => `
-                            <div class="p-3 rounded-xl bg-slate-950/60 border border-slate-800 space-y-1">
+                            <div class="p-3 rounded-xl ${m.sender === 'client' ? 'bg-slate-950/80 border border-slate-800 mr-8' : 'bg-amber-600/20 border border-amber-500/30 ml-8'} space-y-1">
                                 <div class="flex justify-between text-[11px] text-slate-400">
-                                    <span>${m.sender === 'client' ? currentUser.name : 'الأدمن (أنت)'}</span>
+                                    <span class="font-bold ${m.sender === 'client' ? 'text-white' : 'text-amber-400'}">${m.sender === 'client' ? currentUser.name : 'الأدمن (أنت)'}</span>
                                     <span>${m.time}</span>
                                 </div>
                                 ${m.type === 'text'? `<p class="text-sm font-semibold text-white">${m.content}</p>` : ''}
-                                ${m.type === 'image'? `<div><img src="${m.content}" class="w-full h-40 object-cover rounded-lg"><a href="${m.content}" download="admin-download.jpg" class="block mt-2 bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-bold py-1.5 rounded-lg text-center text-xs"><i class="fa-solid fa-download"></i> حفظ الصورة على جهازك</a></div>` : ''}
-                                ${m.type === 'voice'? `<div><audio controls src="${m.content}" class="w-full h-8"></audio></div>` : ''}
+                                ${m.type === 'image'? `<div><img src="${m.content}" class="w-full h-48 object-cover rounded-lg border border-slate-700"><a href="${m.content}" download="admin-download.jpg" class="block mt-2 bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-bold py-2 rounded-lg text-center text-xs shadow"><i class="fa-solid fa-download"></i> حفظ الصورة على جهازك</a></div>` : ''}
+                                ${m.type === 'voice'? `<div><audio controls src="${m.content}" class="w-full h-9"></audio></div>` : ''}
                             </div>
                         `).join('')}
                     </div>
