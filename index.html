@@ -1,325 +1,141 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ولاد شعبان هندي | قومية وكمبيالات السيارات وتفييم الزجاج</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Cairo', sans-serif; background-color: #0f172a; color: #f8fafc; }
-        .hidden-section { display: none; }
-        .chat-scroll::-webkit-scrollbar { width: 5px; }
-        .chat-scroll::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>صراحة VIP</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;min-height:100vh;
+ background:radial-gradient(circle at top,#3b0808,#080808 65%);
+ color:white;font-family:Arial,sans-serif;
+ display:flex;justify-content:center;align-items:center;
+ padding:20px
+}
+.app{
+ width:100%;max-width:430px;
+ background:#151515;border:1px solid #9d1717;
+ border-radius:22px;padding:25px;
+ text-align:center;box-shadow:0 0 30px #65000080
+}
+h1{color:#ff3030;font-size:32px}
+.subtitle{color:#aaa}
+.number{
+ font-size:65px;font-weight:bold;color:#ff3030;
+ margin:20px
+}
+.question{
+ background:#242424;border:1px solid #711515;
+ border-radius:15px;padding:25px;
+ min-height:120px;display:flex;
+ justify-content:center;align-items:center;
+ font-size:21px;line-height:1.7
+}
+button{
+ width:100%;padding:15px;margin-top:15px;
+ border:0;border-radius:12px;
+ background:#b31313;color:white;
+ font-size:18px;font-weight:bold
+}
+button:active{transform:scale(.97)}
+input{
+ width:100%;padding:14px;margin-top:15px;
+ border-radius:10px;border:1px solid #777;
+ background:#222;color:white;font-size:18px;
+ text-align:center
+}
+.small{font-size:12px;color:#888;margin-top:20px}
+</style>
 </head>
-<body class="min-h-screen flex flex-col items-center justify-between p-3 sm:p-6">
+<body>
+<div class="app">
+ <h1>🔥 صراحة VIP 🔥</h1>
+ <div class="subtitle">اختار رقم واكتشف سؤالك</div>
 
-    <!-- 1. شاشة الترحيب الرئيسية -->
-    <div id="welcome-screen" class="w-full max-w-md mx-auto my-auto space-y-6">
-        
-        <!-- معرض صور السيارات والفاميه في الواجهة -->
-        <div class="grid grid-cols-3 gap-2 rounded-3xl overflow-hidden border border-slate-700 shadow-2xl bg-slate-900 p-2">
-            <div class="relative h-24 rounded-xl overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?w=400&auto=format&fit=crop&q=80" class="w-full h-full object-cover" alt="عربية نقل">
-                <div class="absolute inset-0 bg-black/40 flex items-end p-1.5"><span class="text-[9px] font-bold text-amber-400">نقل ثقيل</span></div>
-            </div>
-            <div class="relative h-24 rounded-xl overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1558981403-c5f9899a28bc?w=400&auto=format&fit=crop&q=80" class="w-full h-full object-cover" alt="تفييم سيارات">
-                <div class="absolute inset-0 bg-black/40 flex items-end p-1.5"><span class="text-[9px] font-bold text-amber-400">تفييم وفاميه</span></div>
-            </div>
-            <div class="relative h-24 rounded-xl overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=400&auto=format&fit=crop&q=80" class="w-full h-full object-cover" alt="ميكروباص">
-                <div class="absolute inset-0 bg-black/40 flex items-end p-1.5"><span class="text-[9px] font-bold text-amber-400">ميكروباصات</span></div>
-            </div>
-        </div>
+ <div class="number" id="number">000</div>
+ <div class="question" id="question">
+ اضغط على زر ابدأ اللعبة
+ </div>
 
-        <!-- كارت الترحيب -->
-        <div class="bg-slate-900 border border-slate-700 rounded-3xl p-6 text-center shadow-2xl space-y-6">
-            <div class="w-16 h-16 bg-amber-500/10 text-amber-500 rounded-full flex items-center justify-center mx-auto text-2xl border border-amber-500/20">
-                <i class="fa-solid fa-store"></i>
-            </div>
-            <div>
-                <h1 class="text-xl font-black text-white leading-snug">مرحبا بك في محل ولاد شعبان هندي</h1>
-                <p class="text-amber-400 text-xs font-semibold mt-1">قومية وكمبيالات السيارات والموتوسيكلات وتفييم الزجاج</p>
-            </div>
-            
-            <div class="space-y-3 pt-2">
-                <button onclick="openModal('guest')" class="w-full bg-slate-800 hover:bg-slate-700 border border-slate-600 p-3.5 rounded-2xl font-bold transition flex items-center justify-between shadow text-xs">
-                    <span>تسجيل الدخول ضيف</span>
-                    <i class="fa-solid fa-user text-amber-500 text-base"></i>
-                </button>
-                <button onclick="openModal('register')" class="w-full bg-slate-800 hover:bg-slate-700 border border-slate-600 p-3.5 rounded-2xl font-bold transition flex items-center justify-between shadow text-xs">
-                    <span>تسجيل الدخول دائم</span>
-                    <i class="fa-solid fa-user-check text-amber-500 text-base"></i>
-                </button>
-            </div>
-        </div>
-    </div>
+ <button onclick="randomQuestion()">🎲 سؤال عشوائي</button>
 
-    <!-- نوافذ إدخال الاسم للضيف أو الدائم -->
-    <div id="modal-guest" class="hidden-section fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-4">
-        <div class="bg-slate-900 border border-slate-700 rounded-3xl p-6 max-w-sm w-full space-y-4 shadow-2xl">
-            <h3 class="font-bold text-sm text-amber-400 text-center">دخول الزبون الضيف</h3>
-            <input type="text" id="g-name" placeholder="اكتب اسمك أو رقمك هنا..." class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-amber-500">
-            <div class="flex gap-2 pt-2">
-                <button onclick="closeModals()" class="flex-1 bg-slate-800 py-3 rounded-xl text-xs font-semibold">إلغاء</button>
-                <button onclick="loginUser('ضيف')" class="flex-1 bg-amber-500 text-slate-950 py-3 rounded-xl text-xs font-black">بدء الشات</button>
-            </div>
-        </div>
-    </div>
+ <input id="manual" type="number"
+ min="1" max="430" placeholder="اكتب رقم من 1 إلى 430">
 
-    <div id="modal-register" class="hidden-section fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-4">
-        <div class="bg-slate-900 border border-slate-700 rounded-3xl p-6 max-w-sm w-full space-y-4 shadow-2xl">
-            <h3 class="font-bold text-sm text-amber-400 text-center">تسجيل الدخول الدائم</h3>
-            <input type="text" id="r-name" placeholder="الاسم الكريم أو اللقب..." class="w-full bg-slate-800 border border-slate-700 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-amber-500">
-            <div class="flex gap-2 pt-2">
-                <button onclick="closeModals()" class="flex-1 bg-slate-800 py-3 rounded-xl text-xs font-semibold">إلغاء</button>
-                <button onclick="loginUser('دائم')" class="flex-1 bg-amber-500 text-slate-950 py-3 rounded-xl text-xs font-black">حفظ ودخول</button>
-            </div>
-        </div>
-    </div>
+ <button onclick="chooseNumber()">اختيار الرقم</button>
+ <button onclick="copyQuestion()">📋 نسخ السؤال</button>
 
-    <!-- 2. واجهة شات الزبون -->
-    <div id="chat-screen" class="hidden-section flex-1 max-w-xl w-full mx-auto flex flex-col justify-between space-y-4 my-2">
-        <header class="bg-slate-900 border border-slate-800 p-3.5 rounded-2xl flex items-center justify-between shadow">
-            <div class="flex items-center gap-3">
-                <div class="w-9 h-9 bg-amber-500 text-slate-950 font-black rounded-xl flex items-center justify-center text-base">ش</div>
-                <div>
-                    <h2 class="font-bold text-sm leading-tight">محل ولاد شعبان هندي</h2>
-                    <p id="user-display-tag" class="text-[10px] text-amber-400">متصل الآن</p>
-                </div>
-            </div>
-            <button onclick="logout()" class="bg-red-500/10 text-red-400 px-3 py-1.5 rounded-xl text-[10px] font-bold border border-red-500/20">خروج</button>
-        </header>
+ <div class="small">BAZOOKA VIP • صراحة بدون حدود</div>
+</div>
 
-        <div id="chat-box" class="flex-1 bg-slate-900 border border-slate-800 rounded-2xl p-4 space-y-3 overflow-y-auto chat-scroll min-h-[50vh] max-h-[60vh]">
-            <div class="text-center text-slate-500 text-xs py-10">أهلاً بك! ابدأ بإرسال صور شغلك أو الفويس أو طلبك للمحل...</div>
-        </div>
+<script>
+const questions = [
+"إيه أكتر سر مخبيه عن الناس؟",
+"مين أكتر شخص بتثق فيه؟",
+"هل ندمت على معرفة شخص؟",
+"إيه أكبر كذبة قلتها؟",
+"مين آخر شخص جه في بالك؟",
+"إيه أكتر موقف محرج حصلك؟",
+"هل سامحت شخص ومش قادر تنسى؟",
+"إيه أكتر حاجة نفسك تحققها؟",
+"مين الشخص اللي نفسك تكلمه دلوقتي؟",
+"هل بتثق في الناس بسهولة؟",
+"إيه أكتر حاجة بتخاف تخسرها؟",
+"لو رجع بيك الزمن هتغير إيه؟",
+"مين أكتر شخص أثر في حياتك؟",
+"هل بتخبي زعلك عن الناس؟",
+"إيه الحاجة اللي محدش يعرفها عنك؟",
+"هل حكمت على شخص وطلعت غلطان؟",
+"مين أكتر شخص بيضحكك؟",
+"إيه أصعب قرار أخدته؟",
+"هل عندك حلم خايف تحكيه؟",
+"إيه أكتر صفة بتحبها في نفسك؟",
+"مين الشخص اللي نفسك تشوفه؟",
+"هل بتسامح بسرعة؟",
+"إيه أكتر حاجة بتضايقك؟",
+"لو معاك فرصة تبدأ من جديد هتعمل إيه؟",
+"إيه أكتر ذكرى مش بتنساها؟",
+"هل بتحب تكون لوحدك؟",
+"مين أكتر شخص فاهمك؟",
+"إيه الحاجة اللي نفسك تقولها ومش قادر؟",
+"هل عمرك غيرت رأيك في شخص؟",
+"إيه أكبر درس اتعلمته؟"
+];
 
-        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-3 space-y-2 shadow-xl">
-            <div class="flex items-center gap-2">
-                <input type="text" id="chat-input" placeholder="اكتب رسالتك للمحل هنا..." class="flex-1 bg-slate-800 border border-slate-700 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-amber-500">
-                <!-- زر رفع الصور -->
-                <label class="cursor-pointer bg-slate-800 hover:bg-slate-700 text-amber-400 w-11 h-11 rounded-xl flex items-center justify-center border border-slate-700 transition">
-                    <i class="fa-solid fa-image text-sm"></i>
-                    <input type="file" id="chat-img" accept="image/*" class="hidden" onchange="sendImageMessage()">
-                </label>
-            </div>
-            <div class="flex gap-2">
-                <!-- زر تسجيل الفويس -->
-                <button id="rec-btn" onclick="toggleVoiceRecording()" class="flex-1 bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 py-2.5 rounded-xl text-xs font-bold transition flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-microphone text-red-500"></i>
-                    <span id="rec-txt">تسجيل فويس</span>
-                </button>
-                <!-- زر إرسال النص -->
-                <button onclick="sendTextMessage()" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-6 py-2.5 rounded-xl text-xs transition shadow">إرسال</button>
-            </div>
-            <p class="text-[9px] text-amber-400/80 text-center">الصور الحقيقية والفويس والرسايل تصلك مباشرة على تيليجرام ✅</p>
-        </div>
-    </div>
+function getQuestion(n){
+ return questions[(n-1)%questions.length];
+}
 
-    <script>
-        const TELEGRAM_BOT_TOKEN = "9092607150:AAH5MMRWqawNYQlyQ6mSKE2zzniF3mrLgmw"; 
-        const TELEGRAM_CHAT_ID = "6402034749";
+function showQuestion(n){
+ document.getElementById("number").textContent=n;
+ document.getElementById("question").textContent=getQuestion(n);
+}
 
-        let currentClient = localStorage.getItem('shaban_client_session') || '';
-        let mediaRecorder, audioChunks = [];
+function randomQuestion(){
+ const n=Math.floor(Math.random()*430)+1;
+ showQuestion(n);
+}
 
-        window.onload = () => {
-            if(currentClient) {
-                showChatScreen();
-            } else {
-                showWelcomeScreen();
-            }
-        };
+function chooseNumber(){
+ const n=Number(document.getElementById("manual").value);
+ if(n<1||n>430||!Number.isInteger(n)){
+  alert("اكتب رقم صحيح من 1 إلى 430");
+  return;
+ }
+ showQuestion(n);
+}
 
-        function openModal(type) {
-            closeModals();
-            document.getElementById('modal-' + type).style.display = 'flex';
-        }
-
-        function closeModals() {
-            document.querySelectorAll('.fixed').forEach(el => el.style.display = 'none');
-        }
-
-        function loginUser(type) {
-            const inputId = type === 'ضيف' ? 'g-name' : 'r-name';
-            const name = document.getElementById(inputId).value.trim();
-            if(!name) {
-                alert('اكتب اسمك يا أسطى الأول!');
-                return;
-            }
-            currentClient = name + ` (${type})`;
-            localStorage.setItem('shaban_client_session', currentClient);
-            closeModals();
-            showChatScreen();
-        }
-
-        function logout() {
-            localStorage.removeItem('shaban_client_session');
-            currentClient = '';
-            showWelcomeScreen();
-        }
-
-        function showWelcomeScreen() {
-            document.getElementById('welcome-screen').style.display = 'block';
-            document.getElementById('chat-screen').style.display = 'none';
-        }
-
-        function showChatScreen() {
-            document.getElementById('welcome-screen').style.display = 'none';
-            document.getElementById('chat-screen').style.display = 'flex';
-            document.getElementById('user-display-tag').innerText = 'المستخدم: ' + currentClient;
-            renderMessages();
-        }
-
-        function getMessages() {
-            return JSON.parse(localStorage.getItem('shaban_direct_chat_msgs') || '[]');
-        }
-
-        function saveMessages(msgs) {
-            localStorage.setItem('shaban_direct_chat_msgs', JSON.stringify(msgs));
-        }
-
-        function renderMessages() {
-            const box = document.getElementById('chat-box');
-            let msgs = getMessages();
-            
-            if(msgs.length === 0) {
-                box.innerHTML = `<div class="text-center text-slate-500 text-xs py-10">أهلاً بك يا ${currentClient}! ابدأ بإرسال صور شغلك أو رسالتك للمحل...</div>`;
-                return;
-            }
-
-            box.innerHTML = msgs.map(m => `
-                <div class="flex ${m.sender === 'client' ? 'justify-end' : 'justify-start'}">
-                    <div class="max-w-[85%] p-3 rounded-2xl text-xs space-y-1 ${m.sender === 'client' ? 'bg-amber-600 text-slate-950 font-bold rounded-tr-none' : 'bg-slate-800 text-white rounded-tl-none border border-amber-500/30'}">
-                        <div class="text-[9px] opacity-75">${m.sender === 'client' ? currentClient : 'ولاد شعبان هندي'} • ${m.time}</div>
-                        ${m.type === 'text' ? `<p class="text-sm">${m.content}</p>` : ''}
-                        ${m.type === 'image' ? `<img src="${m.content}" class="rounded-xl w-full max-h-48 object-cover">` : ''}
-                        ${m.type === 'voice' ? `<audio controls src="${m.content}" class="w-full h-8"></audio>` : ''}
-                    </div>
-                </div>
-            `).join('');
-            box.scrollTop = box.scrollHeight;
-        }
-
-        // إرسال رسالة نصية للبوت
-        async function sendTextMessage() {
-            const input = document.getElementById('chat-input');
-            const txt = input.value.trim();
-            if(!txt) return;
-
-            let timeStr = new Date().toLocaleTimeString('ar-EG', {hour: '2-digit', minute:'2-digit'});
-            
-            let msgs = getMessages();
-            msgs.push({ sender: 'client', type: 'text', content: txt, time: timeStr });
-            saveMessages(msgs);
-            input.value = '';
-            renderMessages();
-
-            const telegramMessage = `🚨 رسالة نصية جديدة!\n👤 الاسم: ${currentClient}\n💬 النص: ${txt}\n⏰ الوقت: ${timeStr}`;
-            sendToTelegramText(telegramMessage);
-        }
-
-        // إرسال ملف الصورة الحقيقي للبوت باستخدام sendPhoto
-        async function sendImageMessage() {
-            const fileInput = document.getElementById('chat-img');
-            const file = fileInput.files[0];
-            if(!file) return;
-
-            let timeStr = new Date().toLocaleTimeString('ar-EG', {hour: '2-digit', minute:'2-digit'});
-
-            const reader = new FileReader();
-            reader.onload = async function(e) {
-                const base64Img = e.target.result;
-                let msgs = getMessages();
-                msgs.push({ sender: 'client', type: 'image', content: base64Img, time: timeStr });
-                saveMessages(msgs);
-                renderMessages();
-            };
-            reader.readAsDataURL(file);
-
-            const formData = new FormData();
-            formData.append('chat_id', TELEGRAM_CHAT_ID);
-            formData.append('photo', file);
-            formData.append('caption', `📸 صورة جديدة مرسلة من الزبون!\n👤 الاسم: ${currentClient}\n⏰ الوقت: ${timeStr}`);
-
-            try {
-                await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendPhoto`, {
-                    method: 'POST',
-                    body: formData
-                });
-            } catch (error) {
-                console.error("خطأ في إرسال الصورة للبوت:", error);
-            }
-
-            fileInput.value = '';
-        }
-
-        // تسجيل وإرسال الفويس كملف صوتي حقيقي
-        async function toggleVoiceRecording() {
-            const btn = document.getElementById('rec-btn');
-            const txt = document.getElementById('rec-txt');
-
-            if(!mediaRecorder || mediaRecorder.state === 'inactive') {
-                audioChunks = [];
-                try {
-                    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-                    mediaRecorder = new MediaRecorder(stream);
-                    mediaRecorder.ondataavailable = e => audioChunks.push(e.data);
-                    mediaRecorder.onstop = async () => {
-                        const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
-                        const audioUrl = URL.createObjectURL(audioBlob);
-                        let timeStr = new Date().toLocaleTimeString('ar-EG', {hour: '2-digit', minute:'2-digit'});
-
-                        let msgs = getMessages();
-                        msgs.push({ sender: 'client', type: 'voice', content: audioUrl, time: timeStr });
-                        saveMessages(msgs);
-                        renderMessages();
-
-                        const formData = new FormData();
-                        formData.append('chat_id', TELEGRAM_CHAT_ID);
-                        formData.append('voice', audioBlob, 'voice_message.webm');
-                        formData.append('caption', `🎙️ رسالة صوتية (فويس) مرسلة من:\n👤 الاسم: ${currentClient}\n⏰ الوقت: ${timeStr}`);
-
-                        try {
-                            await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendVoice`, {
-                                method: 'POST',
-                                body: formData
-                            });
-                        } catch (error) {
-                            console.error("خطأ في إرسال الفويس للبوت:", error);
-                        }
-                    };
-                    mediaRecorder.start();
-                    txt.innerText = 'جاري التسجيل...';
-                    btn.classList.add('bg-red-500/20', 'border-red-500');
-                } catch (err) {
-                    alert('عذراً، ميكروفون الموبايل غير متاح أو مرفوض الإذن.');
-                }
-            } else {
-                mediaRecorder.stop();
-                txt.innerText = 'تسجيل فويس';
-                btn.classList.remove('bg-red-500/20', 'border-red-500');
-            }
-        }
-
-        async function sendToTelegramText(text) {
-            try {
-                await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        chat_id: TELEGRAM_CHAT_ID,
-                        text: text
-                    })
-                });
-            } catch (error) {
-                console.error("خطأ في إرسال التنبيه للبوت:", error);
-            }
-        }
-    </script>
+function copyQuestion(){
+ const q=document.getElementById("question").textContent;
+ if(navigator.clipboard){
+  navigator.clipboard.writeText(q)
+   .then(()=>alert("تم نسخ السؤال"));
+ }else{
+  alert(q);
+ }
+}
+</script>
 </body>
 </html>
